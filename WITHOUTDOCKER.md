@@ -62,29 +62,14 @@ type rbenv
 rbenv install 2.5.1
 ```
 
-### プロジェクトのフォーク
-
-[potapanec](https://bitbucket.org/potepancamp/potepanec)へ移動し、左のプラスボタンをクリックします。
-
-![](docs/images/installation/fork1.png)
-
-** Fork ** this repository のリンクをクリックします。
-
-![](docs/images/installation/fork2.png)
-
-所有者が自分になっていることを確認して、リポジトリをフォークします。
-
-![](docs/images/installation/fork3.png)
-
-
 ### プロジェクトの clone
 
-上記でフォークしたリポジトリを自分のPCにクローンします
+ポテパンキャンプで用意しているリポジトリを自分のPCにクローンします
 
 例：
 
 ```
-git clone https://[your_account_name]@bitbucket.org/[your_account_name]/potepanec.git
+git clone https://github.com/potepancamp/[your_repository_name].git
 ```
 
 ### ライブラリのインストール
