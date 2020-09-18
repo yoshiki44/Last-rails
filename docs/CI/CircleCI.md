@@ -7,20 +7,22 @@
 - 実行結果はそのブランチのPull Request上で閲覧できること
 - 全てのテストをパスすると、アプリがHerokuにデプロイされること
 
-# Bitbucketとの連携
-BitbucketとCircleCIを連携させるための設定を行います。
+# GitHubとの連携
+GitHubとCircleCIを連携させるための設定を行います。
 
-まずは以下のURLにアクセスし、Bitbucket連携でSign Upしましょう。
+まずは以下のURLにアクセスし、GitHub連携でSign Upしましょう。
 https://circleci.com/signup/
 
-画面左上のドロップダウンメニューにBitbucketのアイコンが付いたアカウント名が表示されていればOKです。
-![configure ci with bitbucket](../images/CI/configure_ci_with_bitbucket.png)
+Sign Upの際に`Select an organization`で`potepancamp`を選択します。
+
+画面左上のドロップダウンメニューにGitHubのアイコンが付いたアカウント名が表示されていればOKです。
+![configure ci with github](../images/CI/configure_ci_with_github.png)
 
 次にpotepanecレポジトリをCIのビルド対象に追加する設定を行います。
 画面左の`Add Projects`から、potepanecレポジトリ横にある`Set Up Project`を選択します。
 ![set up repo](../images/CI/setup_repo.png)
 
-`config.yml`を追加するためのステップが表示されていますが、fork元の本家potepanecレポジトリでは既に`.circleci/config.yml`に追加されています。ファイルがあることを確認できれば、次のステップに進むために`Use Existing Config`を選択します。
+`config.yml`を追加するためのステップが表示されていますが、potepanecレポジトリでは既に`.circleci/config.yml`に追加されています。ファイルがあることを確認できれば、次のステップに進むために`Use Existing Config`を選択し、その後の確認モーダルで`Start Building`を選択します。
 ![start building](../images/CI/start_building.png)
 
 CircleCIが`.circleci/config.yml`に記載された手順に従ってビルドを開始する様子が確認できたでしょうか?
@@ -29,12 +31,7 @@ CircleCIが`.circleci/config.yml`に記載された手順に従ってビルド�
 
 Pull Request を作成すると、CIの実行結果が画面上で確認できます。
 ![ci result on pr](../images/CI/ci_result_on_pr.png)
-
-### 補足: `.circleci/config.yml`が見つからない方へ
-forkした時期によってはこのファイルがまだ追加されていない可能性があります。
-
-もしファイルが見つからない方は[最新の本家potepanecレポジトリ](https://bitbucket.org/potepancamp/potepanec/src/master/)から対象のファイルをコピーして、ご自身のレポジトリに追加してください。
-追加する際は必ずルートディレクトリ配下に`.circleci/config.yml`という名前で保存するように注意してください。
+※この時点ではまだ設定が足りていないので、全てのチェック項目が成功していなくても問題ありません。
 
 # Herokuデプロイの準備
 ## 前提
