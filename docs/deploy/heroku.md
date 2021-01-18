@@ -15,7 +15,7 @@ HerokuへのデプロイにはHeroku CLIを利用します。[インストール
 まずはHeroku上に空のアプリケーションを作成します。
 
 ```sh
-$ heroku create
+$ heroku create --stack heroku-18
 ```
 
 次にHeroku上にコードをデプロイします。
