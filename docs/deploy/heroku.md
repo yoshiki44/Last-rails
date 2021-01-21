@@ -238,10 +238,12 @@ $ bundle add aws-sdk --version '~>2.3'
 +      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
 +      s3_region: 'ap-northeast-1'
 +    },
-+    bucket: 'potepanec'
++    bucket: 'バケット名'
 +  }
  end
 ```
+
+※「bucket: 'バケット名'」の部分は一つ前の手順でAWS S3に作成したバケット名を設定してください。
 
 ここでは`AWS_ACCESS_KEY_ID`と`AWS_SECRET_ACCESS_KEY`という環境変数から、IAMユーザーの認証情報を取得するようにしています。環境変数を使っているのはセキュリティ上の懸念からです。認証情報をそのままコード内に記述してGitHubなどの不特定多数のユーザーがアクセスできる環境に公開されてしまうと、それを悪用される可能性があります。注意しましょう。
 
