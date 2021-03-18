@@ -22,7 +22,7 @@ Sign Upの際に`Select an organization`で`potepancamp`を選択します。
 画面左の`Add Projects`から、potepanecレポジトリ横にある`Set Up Project`を選択します。
 ![set up repo](../images/CI/setup_repo.png)
 
-`config.yml`を追加するためのステップが表示されていますが、potepanecレポジトリでは既に`.circleci/config.yml`に追加されています。ファイルがあることを確認できれば、次のステップに進むために`Use Existing Config`を選択し、その後の確認モーダルで`Start Building`を選択します。
+potepanecレポジトリの`.circleci/config.yml`が読み込まれていることを確認し、次のステップに進むために`Start Building`を選択します。
 ![start building](../images/CI/start_building.png)
 
 CircleCIが`.circleci/config.yml`に記載された手順に従ってビルドを開始する様子が確認できたでしょうか?
