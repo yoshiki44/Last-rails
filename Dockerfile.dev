@@ -14,7 +14,7 @@ RUN apt-get update                                                              
   && mv entrykit /bin/entrykit                                                                                                          \
   && chmod +x /bin/entrykit                                                                                                             \
   && entrykit --symlink                                                                                                                 \
-  && curl -sL https://deb.nodesource.com/setup_8.x | bash -                                                                             \
+  && curl -sL https://deb.nodesource.com/setup_14.x | bash -                                                                             \
   && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -                                                                  \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list                                      \
   && sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'                                         \
