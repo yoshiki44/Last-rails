@@ -1,19 +1,11 @@
 # -*- mode: dockerfile -*-
 FROM ruby:2.5.1-stretch
 
-ENV ENTRYKIT_VERSION 0.4.0
-
 WORKDIR /potepanec
 
 RUN apt-get update                                                                                                                      \
   && apt-get install                                                                                                                    \
     openssl                                                                                                                             \
-  && wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz     \
-  && tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz                                                                            \
-  && rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz                                                                                   \
-  && mv entrykit /bin/entrykit                                                                                                          \
-  && chmod +x /bin/entrykit                                                                                                             \
-  && entrykit --symlink                                                                                                                 \
   && curl -sL https://deb.nodesource.com/setup_14.x | bash -                                                                             \
   && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -                                                                  \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list                                      \
@@ -46,10 +38,7 @@ RUN apt-get update                                                              
   && mv ~/chromedriver /usr/bin/chromedriver                                                                                            \
   && apt-get clean
 
-ENTRYPOINT [ \
-  "prehook", "bundle install -j3 --path vendor/bundle", "--", \
-  "prehook", "bundle exec rails init_db:setup", "--", \
-  "switch", "reset=bundle exec rails init_db:reset", "--", \
-  "prehook", "ruby -v", "--", \
-  "prehook", "node -v", "--" \
-]
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
