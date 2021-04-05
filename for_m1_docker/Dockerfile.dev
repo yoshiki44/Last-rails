@@ -1,0 +1,34 @@
+# -*- mode: dockerfile -*-
+FROM ruby:2.5.1-stretch
+
+WORKDIR /potepanec
+
+RUN apt-get update                                                                                                                      \
+  && apt-get install                                                                                                                    \
+    openssl                                                                                                                             \
+  && curl -sL https://deb.nodesource.com/setup_14.x | bash -                                                                             \
+  && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -                                                                  \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list                                      \
+  && wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb                                                                   \
+  && DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config_0.8.16-1_all.deb                                                           \
+  && apt-get update                             \
+  && apt-get remove -y                              \
+    libmariadbclient18                              \
+    libmariadbclient-dev-compat                           \
+    libmariadbclient-dev                            \
+  && apt-get install -y --allow-unauthenticated                                                                                         \
+    default-libmysqlclient-dev                                                                                                                  \
+    mysql-client                                                                                                                        \
+    libxml2-dev                                                                                                                         \
+    libxslt-dev                                                                                                                         \
+    libc6-dev                                                                                                                           \
+    nodejs                                                                                                                              \
+    yarn                                                                                                                                \
+    zip                                                                                                                                 \
+  && gem install foreman                                                                                                                \
+  && apt-get clean
+
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
