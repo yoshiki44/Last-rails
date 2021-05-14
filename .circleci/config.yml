@@ -28,7 +28,7 @@ jobs:
   rubocop:
     working_directory: ~/potepanec
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.7.3
     steps:
       - checkout
       - restore_cache:

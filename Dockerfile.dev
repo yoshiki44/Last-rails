@@ -1,5 +1,5 @@
 # -*- mode: dockerfile -*-
-FROM ruby:2.5.1-stretch
+FROM ruby:2.7.3-buster
 
 WORKDIR /potepanec
 
