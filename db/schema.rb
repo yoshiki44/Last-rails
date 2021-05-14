@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_082211) do
+ActiveRecord::Schema.define(version: 2021_05_14_083120) do
 
   create_table "action_mailbox_inbound_emails", charset: "utf8mb3", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -86,9 +86,11 @@ ActiveRecord::Schema.define(version: 2021_05_14_082211) do
     t.integer "country_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
+    t.string "name"
     t.index ["country_id"], name: "index_spree_addresses_on_country_id"
     t.index ["firstname"], name: "index_addresses_on_firstname"
     t.index ["lastname"], name: "index_addresses_on_lastname"
+    t.index ["name"], name: "index_spree_addresses_on_name"
     t.index ["state_id"], name: "index_spree_addresses_on_state_id"
   end
 
@@ -468,6 +470,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_082211) do
     t.datetime "updated_at", precision: 6
     t.boolean "promotionable", default: true
     t.string "meta_title"
+    t.datetime "discontinue_on"
     t.index ["available_on"], name: "index_spree_products_on_available_on"
     t.index ["deleted_at"], name: "index_spree_products_on_deleted_at"
     t.index ["name"], name: "index_spree_products_on_name"
@@ -993,6 +996,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_082211) do
     t.datetime "updated_at", precision: 6
     t.string "cart_tax_country_iso"
     t.string "available_locales"
+    t.string "bcc_email"
     t.index ["code"], name: "index_spree_stores_on_code"
     t.index ["default"], name: "index_spree_stores_on_default"
   end
@@ -1080,6 +1084,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_082211) do
     t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "default_billing", default: false
     t.index ["address_id"], name: "index_spree_user_addresses_on_address_id"
     t.index ["user_id", "address_id"], name: "index_spree_user_addresses_on_user_id_and_address_id", unique: true
     t.index ["user_id"], name: "index_spree_user_addresses_on_user_id"
@@ -1153,6 +1158,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_082211) do
     t.integer "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "apply_to_all", default: true, null: false
     t.index ["product_id"], name: "index_spree_variant_property_rules_on_product_id"
   end
 
