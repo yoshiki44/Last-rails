@@ -1,7 +1,6 @@
 version: "3"
 volumes:
   mysql_data:
-  redis_data:
   vendor_bundle:
   vendor_assets:
   node_modules:
@@ -18,14 +17,6 @@ services:
       - '33306:3306'
     volumes:
       - mysql_data:/var/lib/mysql
-      redis:
-        image: redis:alpine
-        networks:
-          - default
-        ports:
-          - '36379:6379'
-        volumes:
-          - redis_data:/var/lib/redis
   potepanec:
     build:
       context: .
@@ -36,10 +27,8 @@ services:
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
       MYSQL_HOST: mysql
-      REDIS_URL: "redis://redis:6379"
     depends_on:
       - mysql
-      - redis
     networks:
       - default
     volumes:
