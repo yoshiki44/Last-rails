@@ -4,16 +4,13 @@ Spree::Sample.load_sample("option_values")
 Spree::Sample.load_sample("products")
 
 solidus_tshirt = Spree::Product.find_by!(name: "Solidus T-Shirt")
-solidus_long = Spree::Product.find_by!(name: "Solidus Long Sleeve")
 solidus_snapback_cap = Spree::Product.find_by!(name: "Solidus Snapback Cap")
 solidus_hoodie = Spree::Product.find_by!(name: "Solidus Hoodie Zip")
 ruby_hoodie = Spree::Product.find_by!(name: "Ruby Hoodie")
 ruby_hoodie_zip = Spree::Product.find_by!(name: "Ruby Hoodie Zip")
 ruby_polo = Spree::Product.find_by!(name: "Ruby Polo")
-solidus_mug = Spree::Product.find_by!(name: "Solidus Mug")
 ruby_mug = Spree::Product.find_by!(name: "Ruby Mug")
 solidus_tote = Spree::Product.find_by!(name: "Solidus Tote")
-ruby_tote = Spree::Product.find_by!(name: "Ruby Tote")
 solidus_girly = Spree::Product.find_by!(name: "Solidus Girly")
 
 small = Spree::OptionValue.find_by!(name: "Small")
@@ -33,30 +30,6 @@ variants = [
     product: solidus_tshirt,
     option_values: [small, white],
     sku: "SOL-00004",
-    cost_price: 17
-  },
-  {
-    product: solidus_long,
-    option_values: [small, black],
-    sku: "SOL-LS02",
-    cost_price: 17
-  },
-  {
-    product: solidus_long,
-    option_values: [small, white],
-    sku: "SOL-LS01",
-    cost_price: 17
-  },
-  {
-    product: solidus_long,
-    option_values: [medium, white],
-    sku: "SOL-LS04",
-    cost_price: 17
-  },
-  {
-    product: solidus_long,
-    option_values: [medium, black],
-    sku: "SOL-LS05",
     cost_price: 17
   },
   {
@@ -90,20 +63,12 @@ masters = {
     sku: "SOL-TOT01",
     cost_price: 17
   },
-  ruby_tote => {
-    sku: "RUB-TOT01",
-    cost_price: 17
-  },
   solidus_snapback_cap => {
     sku: "SOL-SNC01",
     cost_price: 17
   },
   solidus_tshirt => {
     sku: "SOL-00001",
-    cost_price: 17
-  },
-  solidus_long => {
-    sku: "SOL-LS00",
     cost_price: 17
   },
   solidus_hoodie => {
@@ -121,10 +86,6 @@ masters = {
   ruby_polo => {
     sku: "RUB-PL01",
     cost_price: 23
-  },
-  solidus_mug => {
-    sku: "SOL-MG01",
-    cost_price: 7
   },
   ruby_mug => {
     sku: "RUB-MG01",

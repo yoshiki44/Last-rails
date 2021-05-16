@@ -8,12 +8,6 @@ products =
       "Size" => %{15" x 18" x 6"},
       "Material" => "Canvas"
     },
-    "Ruby Tote" =>
-    {
-      "Type" => "Tote",
-      "Size" => %{15" x 18" x 6"},
-      "Material" => "Canvas"
-    },
     "Solidus Snapback Cap" =>
     {
       "Type" => "Snapback Cap",
@@ -28,17 +22,6 @@ products =
       "Shirt Type" => "Ringer T",
       "Sleeve Type" => "Short",
       "Made from" => "100% Cotton",
-      "Fit" => "Loose",
-      "Gender" => "Men's"
-    },
-    "Solidus Long Sleeve" =>
-    {
-      "Manufacturer" => "Wilson",
-      "Brand" => "Wannabe Sports",
-      "Model" => "TL9002",
-      "Shirt Type" => "Jersey",
-      "Sleeve Type" => "Long",
-      "Made from" => "100% cotton",
       "Fit" => "Loose",
       "Gender" => "Men's"
     },
@@ -85,11 +68,6 @@ products =
       "Made from" => "100% Cotton",
       "Fit" => "Slim",
       "Gender" => "Men's"
-    },
-    "Solidus Mug" =>
-    {
-      "Type" => "Mug",
-      "Size" => %{4.5" tall, 3.25" dia.}
     },
     "Ruby Mug" =>
     {

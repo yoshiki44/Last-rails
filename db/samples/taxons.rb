@@ -8,15 +8,12 @@ brands = Spree::Taxonomy.find_by!(name: "Brand")
 
 products = {
   solidus_tshirt: "Solidus T-Shirt",
-  solidus_long: "Solidus Long Sleeve",
   solidus_tote: "Solidus Tote",
-  ruby_tote: "Ruby Tote",
   solidus_snapback_cap: "Solidus Snapback Cap",
   solidus_hoodie: "Solidus Hoodie Zip",
   ruby_hoodie: "Ruby Hoodie",
   ruby_hoodie_zip: "Ruby Hoodie Zip",
   ruby_polo: "Ruby Polo",
-  solidus_mug: "Solidus Mug",
   ruby_mug: "Ruby Mug",
   solidus_girly: "Solidus Girly"
 }
@@ -51,8 +48,7 @@ taxons = [
     parent: "Categories",
     position: 2,
     products: [
-      products[:solidus_tote],
-      products[:ruby_tote]
+      products[:solidus_tote]
     ]
   },
   {
@@ -61,7 +57,6 @@ taxons = [
     parent: "Categories",
     position: 3,
     products: [
-      products[:solidus_mug],
       products[:ruby_mug]
     ]
   },
@@ -71,7 +66,6 @@ taxons = [
     parent: "Clothing",
     position: 0,
     products: [
-      products[:solidus_long],
       products[:ruby_polo],
       products[:solidus_girly]
     ]
@@ -106,10 +100,8 @@ taxons = [
     parent: "Brand",
     products: [
       products[:solidus_tshirt],
-      products[:solidus_long],
       products[:solidus_snapback_cap],
       products[:solidus_hoodie],
-      products[:solidus_mug],
       products[:solidus_tote],
       products[:solidus_girly]
     ]
@@ -122,8 +114,7 @@ taxons = [
       products[:ruby_hoodie],
       products[:ruby_hoodie_zip],
       products[:ruby_polo],
-      products[:ruby_mug],
-      products[:ruby_tote]
+      products[:ruby_mug]
     ]
   }
 ]

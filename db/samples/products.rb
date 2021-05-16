@@ -33,17 +33,6 @@ products = [
     depth: 5
   },
   {
-    name: "Solidus Long Sleeve",
-    tax_category: tax_category,
-    shipping_category: shipping_category,
-    price: 19.99,
-    eur_price: 16,
-    weight: 0.5,
-    height: 20,
-    width: 10,
-    depth: 5
-  },
-  {
     name: "Solidus Girly",
     tax_category: tax_category,
     shipping_category: shipping_category,
@@ -110,17 +99,6 @@ products = [
     depth: 5
   },
   {
-    name: "Solidus Mug",
-    tax_category: tax_category,
-    shipping_category: shipping_category,
-    price: 9.99,
-    eur_price: 7,
-    weight: 1,
-    height: 5,
-    width: 5,
-    depth: 5
-  },
-  {
     name: "Ruby Mug",
     tax_category: tax_category,
     shipping_category: shipping_category,
@@ -133,17 +111,6 @@ products = [
   },
   {
     name: "Solidus Tote",
-    tax_category: tax_category,
-    shipping_category: shipping_category,
-    price: 15.99,
-    eur_price: 14,
-    weight: 0.5,
-    height: 20,
-    width: 10,
-    depth: 5
-  },
-  {
-    name: "Ruby Tote",
     tax_category: tax_category,
     shipping_category: shipping_category,
     price: 15.99,
