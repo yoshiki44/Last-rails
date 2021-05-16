@@ -4,6 +4,7 @@ volumes:
   vendor_bundle:
   node_modules:
   public_spree:
+  storage:
 
 services:
   mysql:
@@ -38,6 +39,7 @@ services:
       - vendor_bundle:/potepanec/vendor/bundle
       - node_modules:/potepanec/node_modules
       - public_spree:/potepanec/public/spree
+      - storage:/potepanec/storage
     tty: true
     stdin_open: true
     command: bundle exec rails server -b 0.0.0.0
