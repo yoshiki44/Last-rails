@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-bundle install -j3 --path vendor/bundle
+bundle config set --local path 'vendor/bundle'
+
+bundle install -j3
 
 echo n | bundle exec rails init_db:setup
 
