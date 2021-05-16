@@ -15,7 +15,7 @@ HerokuへのデプロイにはHeroku CLIを利用します。[インストール
 まずはHeroku上に空のアプリケーションを作成します。
 
 ```sh
-$ heroku create --stack heroku-18
+$ heroku create
 ```
 
 次にHeroku上にコードをデプロイします。
@@ -104,54 +104,14 @@ $ heroku logs --source=app --tail
 
 これはデータベースには正常に接続できているものの、Solidusが必要とするテーブルが作成されていないことを意味します。
 
-## データベースの設定
-Solidusが必要とするテーブル、および初期データを作成していきましょう。
-
-まずはテーブルの作成です。
-```sh
-$ heroku run bin/rails db:migrate
-```
-`heroku run`は与えられた任意のコマンドをHeroku上で実行するコマンドです。
-ここでは `bin/rails db:migrate`を実行し、必要なテーブルを作成しています。
-
-また、下記コマンドも実行もしてSample Storeのテーブルを作っておきましょう。
-これを実行しないと商品をカートに入れる実装をした時にエラーカート系のテーブルがなくエラーが起こります。
-```sh
-$ heroku run bin/rails runner 'Spree::Store.create!(name: "Sample Store", code: "sample-store", url: "example.com", mail_from_address: "store@example.com")'
-```
-
-これで必要なテーブルは作成できたはずです。アプリケーションのURLにアクセスしてみましょう。
-
-![Solidus initial view](../images/deploy/solidus_initial_view.png)
-
-見事、正常な画面が表示されましたね! 🎉
-
-しかし、まだ問題があります。商品のデータが存在しません。
-
-幸運にもSolidusではサンプルデータを作成するための方法を用意してくれています。
-以下のコマンドを実行して、サンプルデータを作成しましょう。
-
-```sh
-$ heroku run bin/rails runner "['products', 'taxons', 'option_values', 'product_option_types', 'product_properties', 'variants', 'assets'].each { |table| Spree::Sample.load_sample(table) }"
-```
-
-実行が完了したらアプケーションのURLにアクセスしてみましょう。
-
-![Solidus sample loaded](../images/deploy/solidus_sample_loaded.png)
-
-商品データが追加されていることは確認できました。しかし、画像が表示されていません。なぜでしょうか?
-
-Herokuのローカルストレージは[ephemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem)を採用しています。これはSolidusが画像の保存に使っている[paperclip gem](https://github.com/thoughtbot/paperclip)では非対応なので、画像ファイルの保存に失敗しているのが原因です。
-
-### 補足
-通常であれば `heroku run bin/rails g spree:install`を実行することでサンプルデータも同時に作成されます。しかし、これを実行した時にデータベースに発行されるクエリの回数がJawsDBの無料プランの上限を超えてしまいエラーになってしまいます。
-
-ここでは代わりに必要なサンプルデータだけを作成するコマンドを実行することで、無料プランによる制限に引っかかるのを回避しています。
-
 ## AWS S3との連携
-ページにアクセスした時に画像が正常に表示されるようにするために、[AWS S3](https://aws.amazon.com/jp/s3/)と連携する設定を行いましょう。
+ここでデータベースの作成といきたいところですが、その前に画像保存用のストレージを設定する必要があります。
 
-AWS S3はクラウド上のストレージにファイルを保存、ダウンロードすることができるサービスです。多くの画像を扱うライブラリはこれに対応しており、Solidusが使っている[paperclip gem](https://github.com/thoughtbot/paperclip)もシームレスに連携することができます。
+開発環境ではローカルにそのまま画像が保存されていましたが、Herokuではクラウドファイルストレージサービスの利用が推奨されています。
+
+ここでは[AWS S3](https://aws.amazon.com/jp/s3/)を使用するので、さっそく連携する設定を行いましょう。
+
+AWS S3はクラウド上のストレージにファイルを保存、ダウンロードすることができるサービスです。多くの画像を扱うライブラリはこれに対応しておりますが、今回はRails標準の`Active Storage`を使用します。
 
 ここではAWSの無料枠を使ってS3とアプリケーションを連携し、商品画像を保存した時にS3にそのファイルが保存されるようにします。また、商品ページにアクセスした時にS3から画像をダウンロードし、ブラウザに表示されるようにします。
 
@@ -211,41 +171,22 @@ $ aws s3 ls
 
 3つ目のコマンドで作成したバケットが表示されれば完了です。
 
-### paperclip gemの設定
+### Active Storageの設定
 最後にpotepanecアプリケーションとS3を連携させ、商品画像がS3に保存されるようにしましょう。
 
-まずは`aws-sdk` gemを追加します。
+Active Storageの基本設定は済んでいるので、AWSのアカウント情報、およびS3のバケット情報をActive Storageに伝える設定を行います。
+[Active Storageのガイド](https://railsguides.jp/active_storage_overview.html)を参考にして`config/storage.yml`のamazonの項目のコメントアウトを外して必要な変更を加えましょう。
 
-```sh
-$ bundle add aws-sdk --version '~>2.3'
+```yml
+amazon:
+  service: S3
+  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  region: ap-northeast-1
+  bucket: バケット名
 ```
 
-次にAWSのアカウント情報、およびS3のバケット情報をpaperclipに伝える設定を行います。
-[Paperclipのガイド](https://github.com/thoughtbot/paperclip/wiki/Paperclip-with-Amazon-S3)を参考にして`config/environments/production.rb`に必要な変更を加えましょう。
-
-```diff
---- a/config/environments/production.rb
-+++ b/config/environments/production.rb
-@@ -91,4 +91,16 @@ Rails.application.configure do
-
-   # Do not dump schema after migrations.
-   config.active_record.dump_schema_after_migration = false
-+
-+  config.paperclip_defaults = {
-+    storage: :s3,
-+    preserve_files: true,
-+    s3_host_name: 's3-ap-northeast-1.amazonaws.com',
-+    s3_credentials: {
-+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-+      s3_region: 'ap-northeast-1'
-+    },
-+    bucket: 'バケット名'
-+  }
- end
-```
-
-※「bucket: 'バケット名'」の部分は一つ前の手順でAWS S3に作成したバケット名を設定してください。
+※「bucket: バケット名」の部分は一つ前の手順でAWS S3に作成したバケット名を設定してください。
 
 ここでは`AWS_ACCESS_KEY_ID`と`AWS_SECRET_ACCESS_KEY`という環境変数から、IAMユーザーの認証情報を取得するようにしています。環境変数を使っているのはセキュリティ上の懸念からです。認証情報をそのままコード内に記述してGitHubなどの不特定多数のユーザーがアクセスできる環境に公開されてしまうと、それを悪用される可能性があります。注意しましょう。
 
@@ -258,20 +199,52 @@ $ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AW
 最後に、この変更を加えた状態でherokuにデプロイします。
 
 ```sh
-$ git commit -a -m "Configure Paperclip to use S3"
+$ git commit -a -m "Configure Active Storage to use S3"
 $ git push heroku testbranch:master
 ```
 
-デプロイが完了したら登録されてある全ての商品画像をS3にアップロードし直すためのタスクを実行します。
+## データベースの設定
+準備が整ったのでSolidusが必要とするテーブル、および初期データを作成していきましょう。
 
+まずはテーブルの作成です。
 ```sh
-$ heroku run bin/rails _asset_loader:_force_reload:setup
+$ heroku run bin/rails db:migrate
+```
+`heroku run`は与えられた任意のコマンドをHeroku上で実行するコマンドです。
+ここでは `bin/rails db:migrate`を実行し、必要なテーブルを作成しています。
+
+また、下記コマンドも実行もしてSample Storeのテーブルを作っておきましょう。
+これを実行しないと商品をカートに入れる実装をした時にエラーカート系のテーブルがなくエラーが起こります。
+```sh
+$ heroku run bin/rails runner 'Spree::Store.create!(name: "Sample Store", code: "sample-store", url: "example.com", mail_from_address: "store@example.com")'
 ```
 
-以上でおしまいです! 商品画像が表示されましたか?
+これで必要なテーブルは作成できたはずです。アプリケーションのURLにアクセスしてみましょう。
+
+![Solidus initial view](../images/deploy/solidus_initial_view.png)
+
+見事、正常な画面が表示されましたね! 🎉
+
+しかし、まだ問題があります。商品のデータが存在しません。
+
+幸運にもSolidusではサンプルデータを作成するための方法を用意してくれています。
+以下のコマンドを実行して、サンプルデータを作成しましょう。
+
+```sh
+$ heroku run bin/rails runner "['products', 'taxons', 'option_values', 'product_option_types', 'product_properties', 'variants', 'assets'].each { |table| Spree::Sample.load_sample(table) }"
+```
+
+実行が完了したらアプケーションのURLにアクセスしてみましょう。
 
 ![Solidus initial view](../images/deploy/solidus_images_displayed.png)
+
+以上でおしまいです! 商品データが表示されましたか?
 
 念の為、課題で実装したページでも画像が表示されていることを確認しておきましょう。
 
 ![Solidus initial view](../images/deploy/images_on_custom_page.png)
+
+### 補足
+通常であれば `heroku run bin/rails g spree:install`を実行することでサンプルデータも同時に作成されます。しかし、これを実行した時にデータベースに発行されるクエリの回数がJawsDBの無料プランの上限を超えてしまいエラーになってしまいます。
+
+ここでは代わりに必要なサンプルデータだけを作成するコマンドを実行することで、無料プランによる制限に引っかかるのを回避しています。
