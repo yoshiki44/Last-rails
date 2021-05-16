@@ -2,7 +2,6 @@ version: "3"
 volumes:
   mysql_data:
   vendor_bundle:
-  vendor_assets:
   node_modules:
   public_spree:
 
@@ -37,7 +36,6 @@ services:
       - /potepanec/log
       - /potepanec/tmp
       - vendor_bundle:/potepanec/vendor/bundle
-      - vendor_assets:/potepanec/vendor/assets
       - node_modules:/potepanec/node_modules
       - public_spree:/potepanec/public/spree
     tty: true
