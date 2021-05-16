@@ -118,25 +118,25 @@
   float: right;
 }
 .owl-prev span{
-  background: url(images/left-arrow.png) no-repeat top; /* change here */
+  background: url(/assets/plugins/owl-carousel/images/left-arrow.png) no-repeat top; /* change here */
   width: 7px;
   height: 12px;
   display: block;
 }
 .owl-prev:hover span{
-  background: url(images/left-arrow.png) no-repeat bottom; /* change here */
+  background: url(/assets/plugins/owl-carousel/images/left-arrow.png) no-repeat bottom; /* change here */
   width: 7px;
   height: 12px;
   display: block;
 }
 .owl-next span{
-  background: url(images/right-arrow.png) no-repeat top; /* change here */
+  background: url(/assets/plugins/owl-carousel/images/right-arrow.png) no-repeat top; /* change here */
   width: 7px;
   height: 12px;
   display: block;
 }
 .owl-next:hover span{
-  background: url(images/right-arrow.png) no-repeat bottom; /* change here */
+  background: url(/assets/plugins/owl-carousel/images/right-arrow.png) no-repeat bottom; /* change here */
   width: 7px;
   height: 12px;
   display: block;
