@@ -9,7 +9,7 @@
 }
 .sbSelector:link, .sbSelector:visited, .sbSelector:hover { color:#00f !important; outline:none; text-decoration:none; 
 }
-.sbToggle { width:14px; height:10px; position:absolute; top:14px; right:15px; display:block; outline:none; background:url(../images/arrow-down-1.png) no-repeat; 
+.sbToggle { width:14px; height:10px; position:absolute; top:14px; right:15px; display:block; outline:none; background:url(/assets/selectbox/arrow-down-1.png) no-repeat; 
 }
 .sbToggle:hover { 
 }
@@ -99,7 +99,7 @@
 	text-indent: 18px;
 }
 .filterArea .sbToggle {
-    background: rgba(0, 0, 0, 0) url("images/arrow-down-1.png") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) image-url("/assets/selectbox/arrow-down-1.png") no-repeat scroll 0 0;
     height: 5px;
     right: 10px;
     top: 14px;
@@ -140,7 +140,7 @@
 	text-indent: 18px;
 }
 .quick-drop .sbToggle {
-    background: rgba(0, 0, 0, 0) url("images/drop-down-arrow.jpg") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/selectbox/drop-down-arrow.jpg") no-repeat scroll 0 0;
     height: 6px;
     right: 10px;
     top: 16px;
@@ -187,7 +187,7 @@
 	text-indent: 18px;
 }
 .step-drop .sbToggle {
-	background: rgba(0, 0, 0, 0) url("images/arrow-down-1.png") no-repeat scroll 0 0;
+	background: rgba(0, 0, 0, 0) url("/assets/selectbox/arrow-down-1.png") no-repeat scroll 0 0;
 	height: 5px;
 	right: 15px;
 	top: 22px;

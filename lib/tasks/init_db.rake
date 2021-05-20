@@ -16,8 +16,10 @@ namespace :init_db do
   end
 
   def install_spree
-    system 'bundle exec rails g spree:install --auto-accept'
     system 'bundle exec rails g solidus:auth:install'
+    system 'bundle exec rails db:create'
+    system 'bundle exec rails db:migrate'
+    system 'bundle exec rails runner "[\'products\', \'taxons\', \'option_values\', \'product_option_types\', \'product_properties\', \'variants\', \'assets\'].each { |table| Spree::Sample.load_sample(table) }"'
   end
 
   def databases_exists?
