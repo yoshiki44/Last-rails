@@ -7,7 +7,7 @@ RUN apt-get update                                                              
   && apt-get install                                                                                                                    \
     openssl                                                                                                                             \
   && curl -sL https://deb.nodesource.com/setup_14.x | bash -                                                                            \
-  && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -                                                                  \
+  && wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -                                         \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list                                      \
   && wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb                                                                   \
   && DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config_0.8.16-1_all.deb                                                           \
@@ -18,7 +18,7 @@ RUN apt-get update                                                              
     libmariadbclient-dev                                                                                                                \
   && apt-get install -y --allow-unauthenticated                                                                                         \
     default-libmysqlclient-dev                                                                                                          \
-    mysql-client                                                                                                                        \
+    mariadb-client                                                                                                                      \
     libxml2-dev                                                                                                                         \
     libxslt-dev                                                                                                                         \
     libc6-dev                                                                                                                           \
