@@ -6,7 +6,99 @@
 - ユニークなURLが生成され、誰でもアクセス出来る状態になっていること
 
 # 準備
+## Heroku CLIをインストール
 HerokuへのデプロイにはHeroku CLIを利用します。[インストール](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)しておきましょう。
+
+## AWS S3との連携
+
+開発環境ではローカルにそのまま画像が保存されていましたが、Herokuではクラウドファイルストレージサービスの利用が推奨されています。
+
+ここでは[AWS S3](https://aws.amazon.com/jp/s3/)を使用するので、さっそく連携する設定を行いましょう。
+
+AWS S3はクラウド上のストレージにファイルを保存、ダウンロードすることができるサービスです。多くの画像を扱うライブラリはこれに対応しておりますが、今回はRails標準の`Active Storage`を使用します。
+
+ここではAWSの無料枠を使ってS3とアプリケーションを連携し、商品画像を保存した時にS3にそのファイルが保存されるようにします。また、商品ページにアクセスした時にS3から画像をダウンロードし、ブラウザに表示されるようにします。
+
+### AWSアカウントの作成
+まずはAWSのアカウントを作成しましょう。以下のURLから手順に従って情報を入力してください。
+https://portal.aws.amazon.com/billing/signup
+
+AWSにはいくつかのサービスで[無料枠](https://aws.amazon.com/jp/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc)があり、S3では5GBまで無料で使えます。途中、クレジットカード情報を入力する場面がありますが、無料枠内であれば実際に請求されることはないので安心してください。
+
+### IAMユーザーの作成
+アカウントが作成できれば、次は[IAM](https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/home)ユーザーを作成します
+IAMはAWSサービスの1つで、簡単に言うと先ほど作成したAWSアカウントに紐づくユーザー情報を作成・編集・削除出来るものです。IAMユーザーには各AWSサービスに対する権限、例えば「S3に画像をアップロードする権限」を設定できます。
+
+ここではSolidusアプリケーションに設定するためのユーザー、`potepanec`ユーザーを作成し、必要な権限を付与していきましょう。
+
+まずは[AWS IAM](https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/home)のページにアクセスします。
+
+左のメニューから`User`->`Add user`を選択し、以下の情報を入力してください。
+- User nameは`potepanec`
+- Access typeは`Programmatic access`にチェックを入れる
+- Add permission -> Attach existing policies directly から`AmazonS3FullAccess`を選択する
+- Tagは何も入れなくてOK
+
+ユーザーが作成されると`Download .csv`からアクセス情報をダウンロードしておきましょう。
+このファイルは後にpotepanecアプリケーションとAWS連携させる際に必要になるのでどこかに保存しておいてください。
+
+### S3バケットの作成
+バケット(bucket)とはS3上のフォルダのようなもので、ファイルを保存したり、さらにその下にフォルダを作成することができます。
+
+AWS CLIを使ってバケットを作成するので、まずはAWS CLIをインストールしましょう。
+
+```sh
+$ brew install awscli
+```
+
+インストールが完了したことが確認できれば、先ほどダウンロードした`potepanec`ユーザーの情報が記載されたCSVファイルを参照しながら、AWS CLIの設定を行いましょう。
+
+```sh
+$ aws configure
+AWS Access Key ID [None]: （potepanecユーザーのAccess key ID）
+AWS Secret Access Key [None]: （potepanecユーザーののSecret access key）
+Default region name [None]: ap-northeast-1
+Default output format [None]: json
+```
+
+設定できればAWS CLIを使ってバケットを作成します。
+
+※バケット名はS3上でユニークでなければならないため、バケット名「potepanec」の部分は適宜変更してください。
+
+```sh
+$ aws s3 mb s3://potepanec
+make_bucket: potepanec
+$ aws s3api put-bucket-acl --bucket potepanec --acl public-read
+$ aws s3 ls
+2019-10-12 10:20:01 potepanec
+```
+
+3つ目のコマンドで作成したバケットが表示されれば完了です。
+
+### Active Storageの設定
+最後にpotepanecアプリケーションとS3を連携させ、商品画像がS3に保存されるようにしましょう。
+
+Active Storageの基本設定は済んでいるので、AWSのアカウント情報、およびS3のバケット情報をActive Storageに伝える設定を行います。
+[Active Storageのガイド](https://railsguides.jp/active_storage_overview.html)を参考にして`config/storage.yml`のamazonの項目のコメントアウトを外して必要な変更を加えましょう。
+
+```yml
+amazon:
+  service: S3
+  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  region: ap-northeast-1
+  bucket: バケット名
+```
+
+※「bucket: バケット名」の部分は一つ前の手順でAWS S3に作成したバケット名を設定してください。
+
+最後に、この変更をコミットしましょう。
+
+```sh
+$ git commit -a -m "Configure Active Storage to use S3"
+```
+
+ここでは`AWS_ACCESS_KEY_ID`と`AWS_SECRET_ACCESS_KEY`という環境変数から、IAMユーザーの認証情報を取得するようにしています。環境変数を使っているのはセキュリティ上の懸念からです。認証情報をそのままコード内に記述してGitHubなどの不特定多数のユーザーがアクセスできる環境に公開されてしまうと、それを悪用される可能性があります。注意しましょう。
 
 # 初めてのデプロイ
 ## HerokuへDeploy
@@ -18,7 +110,13 @@ HerokuへのデプロイにはHeroku CLIを利用します。[インストール
 $ heroku create
 ```
 
-次にHeroku上にコードをデプロイします。
+次にHerokuにデプロイした時に、準備しておいたAWS S3バケットへの接続情報を、potepanecアプリケーションが取得できるようにheroku CLIを使って設定します。
+
+```sh
+$ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AWS_SECRET_ACCESS_KEY=(potepanecユーザーのSecret access key)
+```
+
+最後にHeroku上にコードをデプロイします。
 ここではデプロイしたいブランチ名を`testbranch`と仮定します。
 
 ```sh
@@ -104,107 +202,8 @@ $ heroku logs --source=app --tail
 
 これはデータベースには正常に接続できているものの、Solidusが必要とするテーブルが作成されていないことを意味します。
 
-## AWS S3との連携
-ここでデータベースの作成といきたいところですが、その前に画像保存用のストレージを設定する必要があります。
-
-開発環境ではローカルにそのまま画像が保存されていましたが、Herokuではクラウドファイルストレージサービスの利用が推奨されています。
-
-ここでは[AWS S3](https://aws.amazon.com/jp/s3/)を使用するので、さっそく連携する設定を行いましょう。
-
-AWS S3はクラウド上のストレージにファイルを保存、ダウンロードすることができるサービスです。多くの画像を扱うライブラリはこれに対応しておりますが、今回はRails標準の`Active Storage`を使用します。
-
-ここではAWSの無料枠を使ってS3とアプリケーションを連携し、商品画像を保存した時にS3にそのファイルが保存されるようにします。また、商品ページにアクセスした時にS3から画像をダウンロードし、ブラウザに表示されるようにします。
-
-### AWSアカウントの作成
-まずはAWSのアカウントを作成しましょう。以下のURLから手順に従って情報を入力してください。
-https://portal.aws.amazon.com/billing/signup
-
-AWSにはいくつかのサービスで[無料枠](https://aws.amazon.com/jp/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc)があり、S3では5GBまで無料で使えます。途中、クレジットカード情報を入力する場面がありますが、無料枠内であれば実際に請求されることはないので安心してください。
-
-### IAMユーザーの作成
-アカウントが作成できれば、次は[IAM](https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/home)ユーザーを作成します
-IAMはAWSサービスの1つで、簡単に言うと先ほど作成したAWSアカウントに紐づくユーザー情報を作成・編集・削除出来るものです。IAMユーザーには各AWSサービスに対する権限、例えば「S3に画像をアップロードする権限」を設定できます。
-
-ここではSolidusアプリケーションに設定するためのユーザー、`potepanec`ユーザーを作成し、必要な権限を付与していきましょう。
-
-まずは[AWS IAM](https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/home)のページにアクセスします。
-
-左のメニューから`User`->`Add user`を選択し、以下の情報を入力してください。
-- User nameは`potepanec`
-- Access typeは`Programmatic access`にチェックを入れる
-- Add permission -> Attach existing policies directly から`AmazonS3FullAccess`を選択する
-- Tagは何も入れなくてOK
-
-ユーザーが作成されると`Download .csv`からアクセス情報をダウンロードしておきましょう。
-このファイルは後にpotepanecアプリケーションとAWS連携させる際に必要になるのでどこかに保存しておいてください。
-
-### S3バケットの作成
-バケット(bucket)とはS3上のフォルダのようなもので、ファイルを保存したり、さらにその下にフォルダを作成することができます。
-
-AWS CLIを使ってバケットを作成するので、まずはAWS CLIをインストールしましょう。
-
-```sh
-$ brew install awscli
-```
-
-インストールが完了したことが確認できれば、先ほどダウンロードした`potepanec`ユーザーの情報が記載されたCSVファイルを参照しながら、AWS CLIの設定を行いましょう。
-
-```sh
-$ aws configure
-AWS Access Key ID [None]: （potepanecユーザーのAccess key ID）
-AWS Secret Access Key [None]: （potepanecユーザーののSecret access key）
-Default region name [None]: ap-northeast-1
-Default output format [None]: json
-```
-
-設定できればAWS CLIを使ってバケットを作成します。
-
-※バケット名はS3上でユニークでなければならないため、バケット名「potepanec」の部分は適宜変更してください。
-
-```sh
-$ aws s3 mb s3://potepanec
-make_bucket: potepanec
-$ aws s3api put-bucket-acl --bucket potepanec --acl public-read
-$ aws s3 ls
-2019-10-12 10:20:01 potepanec
-```
-
-3つ目のコマンドで作成したバケットが表示されれば完了です。
-
-### Active Storageの設定
-最後にpotepanecアプリケーションとS3を連携させ、商品画像がS3に保存されるようにしましょう。
-
-Active Storageの基本設定は済んでいるので、AWSのアカウント情報、およびS3のバケット情報をActive Storageに伝える設定を行います。
-[Active Storageのガイド](https://railsguides.jp/active_storage_overview.html)を参考にして`config/storage.yml`のamazonの項目のコメントアウトを外して必要な変更を加えましょう。
-
-```yml
-amazon:
-  service: S3
-  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
-  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
-  region: ap-northeast-1
-  bucket: バケット名
-```
-
-※「bucket: バケット名」の部分は一つ前の手順でAWS S3に作成したバケット名を設定してください。
-
-ここでは`AWS_ACCESS_KEY_ID`と`AWS_SECRET_ACCESS_KEY`という環境変数から、IAMユーザーの認証情報を取得するようにしています。環境変数を使っているのはセキュリティ上の懸念からです。認証情報をそのままコード内に記述してGitHubなどの不特定多数のユーザーがアクセスできる環境に公開されてしまうと、それを悪用される可能性があります。注意しましょう。
-
-Herokuにデプロイした時に、potepanecアプリケーションがこの環境変数を取得できるようにheroku CLIを使って設定します。
-
-```sh
-$ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AWS_SECRET_ACCESS_KEY=(potepanecユーザーのSecret access key)
-```
-
-最後に、この変更を加えた状態でherokuにデプロイします。
-
-```sh
-$ git commit -a -m "Configure Active Storage to use S3"
-$ git push heroku testbranch:master
-```
-
 ## データベースの設定
-準備が整ったのでSolidusが必要とするテーブル、および初期データを作成していきましょう。
+Solidusが必要とするテーブル、および初期データを作成していきましょう。
 
 まずはテーブルの作成です。
 ```sh
