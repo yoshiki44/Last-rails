@@ -16,6 +16,7 @@ https://circleci.com/signup/
 Sign Upの際に`Select an organization`で`potepancamp`を選択します。
 
 画面左上のドロップダウンメニューにGitHubのアイコンが付いたアカウント名が表示されていればOKです。
+
 ![configure ci with github](../images/CI/configure_ci_with_github.png)
 
 次にpotepanEC-studentレポジトリをCIのビルド対象に追加する設定を行います。<br>
@@ -37,31 +38,41 @@ CircleCIが`.circleci/config.yml`に記載された手順に従ってビルド�
 ![jobs on circleci](../images/CI/jobs_on_circleci.png)
 
 Pull Request を作成すると、CIの実行結果が画面上で確認できます。
+
 ![ci result on pr](../images/CI/ci_result_on_pr.png)
+
 ※この時点ではまだ設定が足りていないので、全てのチェック項目が成功していなくても問題ありません。
 
 # Herokuデプロイの準備
+
 ## 前提
+
 [ローカルからHerokuにデプロイする設定](../deploy/heroku.md)を先に完了させておいてください。
+
 CicleCIからHerokuにデプロイする前に、まずはローカルからHerokuにデプロイ出来るようにする必要があります。
 
 # 手順
+
 ここではCirckeCIでテストが通った後、自動的にHerokuにデプロイするための設定を行います。
 
 まずCircleCIにHerokuの認証情報を追加しましょう。
 
 HerokuのWebページにログインし、右上の自分のアイコンから`Account settings`を選択します。
+
 ![heroku personal](../images/CI/heroku_personal.png)
 
 `API Key`セクションにある`Reveal`ボタンをクリックすると表示されるトークンをコピーしておきます。
+
 ![heroku apu key](../images/CI/heroku_api_key.png)
 
 続いて、CircleCI上でPipelines画面の右上にある歯車アイコンをクリックします。
+
 ![config gear](../images/CI/config_gear.png)
 
 左メニューから`Environment Variable`を選択し、`Add Variables`ボタンをクリックするとポップアップが表示されます。
 
 `Name`に`HEROKU_API_KEY`、`Value`に先ほどコピーしたHerokuのAPI Keyを入力し、`Add Variable`をクリックします。
+
 ![circleci_env_var](../images/CI/circleci_env_var.png)
 
 次に[ローカルからHerokuにデプロイする設定](../deploy/heroku.md)で取得したAWSの認証情報を追加します。
