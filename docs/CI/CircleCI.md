@@ -18,8 +18,10 @@ Sign Upの際に`Select an organization`で`potepancamp`を選択します。
 画面左上のドロップダウンメニューにGitHubのアイコンが付いたアカウント名が表示されていればOKです。
 ![configure ci with github](../images/CI/configure_ci_with_github.png)
 
-次にpotepanecレポジトリをCIのビルド対象に追加する設定を行います。
-画面左の`Add Projects`から、potepanecレポジトリ横にある`Set Up Project`を選択します。
+次にpotepanEC-studentレポジトリをCIのビルド対象に追加する設定を行います。<br>
+画面左の`Add Projects`から、potepanEC-studentレポジトリの`Set Up Project`を選択します。<br>
+※`potepanEC-student`の部分は、皆様それぞれのレポジトリ名に置き換えてください。
+
 ![set up repo](../images/CI/setup_repo.png)
 
 `config.yml`を追加するためのステップが表示されていますが、fork元の本家potepanecレポジトリでは既に`.circleci/config.yml`に追加されています。ファイルがあることを確認できれば、次のステップに進むために`Use Existing Config`を選択します。
