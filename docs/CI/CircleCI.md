@@ -1,13 +1,16 @@
 # CircleCI設定手順
+
 ここではCircleCI上でRSpec、およびRubocopを実行させるまでの手順を説明します。
 
-# ゴール
+## ゴール
+
 - ローカルcommitをremoteブランチにpushする度にCIが起動すること
 - CIはすべての種類のRSpec、およびRubocopを実行すること
 - 実行結果はそのブランチのPull Request上で閲覧できること
 - 全てのテストをパスすると、アプリがHerokuにデプロイされること
 
-# GitHubとの連携
+## GitHubとの連携
+
 GitHubとCircleCIを連携させるための設定を行います。
 
 まずは以下のURLにアクセスし、GitHub連携でSign Upしましょう。
@@ -43,15 +46,17 @@ Pull Request を作成すると、CIの実行結果が画面上で確認でき�
 
 ※この時点ではまだ設定が足りていないので、全てのチェック項目が成功していなくても問題ありません。
 
-# Herokuデプロイの準備
+<br>
 
-## 前提
+## Herokuデプロイの準備
+
+### 前提
 
 [ローカルからHerokuにデプロイする設定](../deploy/heroku.md)を先に完了させておいてください。
 
 CicleCIからHerokuにデプロイする前に、まずはローカルからHerokuにデプロイ出来るようにする必要があります。
 
-# 手順
+### 手順
 
 ここではCirckeCIでテストが通った後、自動的にHerokuにデプロイするための設定を行います。
 
