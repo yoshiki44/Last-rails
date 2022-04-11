@@ -13,7 +13,7 @@
 
 GitHubとCircleCIを連携させるための設定を行います。
 
-まずは以下のURLにアクセスし、GitHub連携でSign Upしましょう。
+まずは以下のURLにアクセスし、GitHub連携でSign Upしましょう。<br>
 https://circleci.com/signup/
 
 Sign Upの際に`Select an organization`で`potepancamp`を選択します。
@@ -28,11 +28,13 @@ Sign Upの際に`Select an organization`で`potepancamp`を選択します。
 
 ![set up repo](../images/CI/setup_repo.png)
 
-`config.yml`を追加するためのステップが表示されていますが、fork元の本家potepanecレポジトリでは既に`.circleci/config.yml`に追加されています。ファイルがあることを確認できれば、次のステップに進むために`Use Existing Config`を選択します。
+`config.yml`を追加するためのステップが表示されていますが、fork元の本家potepanecレポジトリでは既に`.circleci/config.yml`に追加されています。<br>
+ファイルがあることを確認できれば、次のステップに進むために`Use Existing Config`を選択します。
 
 ![start building](../images/CI/start_building.jpg)
 
-※CircleCIのこの画面は仕様が二転三転しており、上記の手順と少し異なるケースがあります。以下のように既にpotepanecレポジトリの`.circleci/config.yml`が読み込まれていて、`Start Building`ボタンしか表示されない場合はそのまま`Start Building`を選択してください。
+※CircleCIのこの画面は仕様が二転三転しており、上記の手順と少し異なるケースがあります。<br>
+以下のように既にpotepanecレポジトリの`.circleci/config.yml`が読み込まれていて、`Start Building`ボタンしか表示されない場合はそのまま`Start Building`を選択してください。
 
 ![start building](../images/CI/start_building_2.png)
 
