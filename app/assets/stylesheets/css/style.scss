@@ -664,6 +664,7 @@ a:hover, a:focus {
 .navbar-default .navbar-collapse li.dropdown.open .dropdown-menu li a {
   float: left;
 }
+
 .open > .dropdown-menu {
   width: 400px;
   margin-top: 0;
@@ -672,10 +673,12 @@ a:hover, a:focus {
     width: 300px;
   }
 }
+
 .input-group-addon:last-child {
   background: #47bac1;
   color: #fff;
 }
+
 @media (max-width: 479px) {
   .navbar-default .navbar-collapse li.dropdown.open .dropdown-menu li a {
     padding: 10px 12px 10px 0;
@@ -1509,7 +1512,8 @@ body.bodyColor.container {
   width: 100%;
   display: block;
 }
-.imageBox .productCaption h5, .whiteSection .featuredProducts .slide .productCaption h5, .mainContent .featuredProducts .slide .productCaption h5, .productsContent .productBox .productCaption h5 {
+.imageBox .productCaption h5, .whiteSection .featuredProducts .slide .productCaption h5, .mainContent .featuredProducts .slide .productCaption h5, .productsContent .productBox .productCaption h5 a{
+  color: #252525;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -2418,6 +2422,10 @@ body.bodyColor.container {
   margin-bottom: 0 !important;
 }
 
+.navbar-side-collapse .side-nav li .collapseItem span{
+  margin-left: 10px;
+}
+
 .filterNormal .list-unstyled {
   width: 100%;
 }
@@ -2745,6 +2753,7 @@ body.bodyColor.container {
     height: auto;
   }
 }
+
 .productListSingle .media .media-body .media-heading a {
   font-size: 20px;
   letter-spacing: 1px;
