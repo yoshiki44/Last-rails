@@ -4,6 +4,7 @@ jobs:
     working_directory: ~/potepanec
     docker:
       - image: cimg/ruby:2.7.3
+    resource_class: small
     steps:
       - checkout
       - setup_remote_docker
@@ -29,6 +30,7 @@ jobs:
     working_directory: ~/potepanec
     docker:
       - image: cimg/ruby:2.7.3
+    resource_class: small
     steps:
       - checkout
       - restore_cache:
@@ -52,6 +54,7 @@ jobs:
     working_directory: ~/potepanec
     docker:
       - image: sue445/heroku-cli
+    resource_class: small
     steps:
       - checkout
       - build-tools/install-ci-tools
