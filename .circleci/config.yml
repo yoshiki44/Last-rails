@@ -3,7 +3,7 @@ jobs:
   rspec:
     working_directory: ~/potepanec
     docker:
-      - image: circleci/ruby
+      - image: cimg/ruby:2.7.3
     steps:
       - checkout
       - setup_remote_docker
@@ -28,7 +28,7 @@ jobs:
   rubocop:
     working_directory: ~/potepanec
     docker:
-      - image: circleci/ruby:2.7.3
+      - image: cimg/ruby:2.7.3
     steps:
       - checkout
       - restore_cache:
