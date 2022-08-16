@@ -9,6 +9,7 @@ services:
       - default
     ports:
       - '33306:3306'
+    command: --default-authentication-plugin=mysql_native_password
   redis:
     image: redis:alpine
     networks:
