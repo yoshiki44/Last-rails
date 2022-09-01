@@ -107,7 +107,7 @@ $ git commit -a -m "Configure Active Storage to use S3"
 まずはHeroku上に空のアプリケーションを作成します。
 
 ```sh
-$ heroku create
+$ heroku create --stack heroku-20
 ```
 
 次にHerokuにデプロイした時に、準備しておいたAWS S3バケットへの接続情報を、potepanecアプリケーションが取得できるようにheroku CLIを使って設定します。
