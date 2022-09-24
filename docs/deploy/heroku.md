@@ -168,13 +168,16 @@ $ heroku addons:create jawsdb:kitefin
 次にRailsに作成したデータベースの接続情報を追加していきます。
 `config/database.yml`にある`production`の設定情報を以下のように変更してください。
 
-```yml
-production:
-  <<: *default
-  url: <%= ENV['JAWSDB_URL']&.sub('mysql://', 'mysql2://') %>
+```diff
+ production:
+   <<: *default
+-  database: potepanec_2_7_production
+-  username: potepanec
+-  password: <%= ENV['POTEPANEC_DATABASE_PASSWORD'] %>
++  url: <%= ENV['JAWSDB_URL']&.sub('mysql://', 'mysql2://') %>
 ```
 
-`JAWSDB_URL`は先程設定したJawsDBプラグインから提供される環境変数で、データベースに接続するためにURLが格納されています。
+`JAWSDB_URL`は先程設定したJawsDBプラグインから提供される環境変数で、ユーザー名やパスワードを含めデータベースに接続するためのすべての情報が格納されています。
 
 以上でデータベースの設定は完了です。
 
