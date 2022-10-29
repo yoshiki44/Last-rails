@@ -6,6 +6,13 @@
 - ユニークなURLが生成され、誰でもアクセス出来る状態になっていること
 
 # 準備
+## Herokuユーザー登録
+最終課題に入るタイミングでHerokuより以下の件名の招待メールが送信されています。
+
+「Invitation to collaborate on (アプリケーション名)」
+
+このメールからユーザー登録しておきましょう。
+
 ## Heroku CLIをインストール
 HerokuへのデプロイにはHeroku CLIを利用します。[インストール](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)しておきましょう。
 
@@ -104,16 +111,24 @@ $ git commit -a -m "Configure Active Storage to use S3"
 ## HerokuへDeploy
 うまくいくかどうかわかりませんが、まずはHerokuにデプロイするまでの手順を一通り行ってみましょう。
 
-まずはHeroku上に空のアプリケーションを作成します。
+まずは各受講生向けに用意されているHerokuアプリケーション情報を確認します。
+
+Herokuからの招待メールに記載されているアプリケーション名を確認の上、以下を実行しましょう。
 
 ```sh
-$ heroku create --stack heroku-20
+$ heroku info -a (アプリケーション名)
+```
+
+次にアプリケーション情報の中からHerokuアプリケーション用の`Git URL`を確認し、push先のリポジトリリストに登録しましょう。
+
+```sh
+$ git remote add heroku (Git URL)
 ```
 
 次にHerokuにデプロイした時に、準備しておいたAWS S3バケットへの接続情報を、potepanecアプリケーションが取得できるようにheroku CLIを使って設定します。
 
 ```sh
-$ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AWS_SECRET_ACCESS_KEY=(potepanecユーザーのSecret access key)
+$ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AWS_SECRET_ACCESS_KEY=(potepanecユーザーのSecret access key) -a (アプリケーション名)
 ```
 
 最後にHeroku上にコードをデプロイします。
