@@ -159,7 +159,13 @@ $ git commit -a -m "Configure Active Storage to use S3"
 $ heroku create --stack heroku-20
 ```
 
-実行後、「次に、上記で準備したAWS S3バケットへの接続情報を...」までスキップしてください。
+次に、事前に準備したAWS S3バケットへの接続情報を`potepanec`アプリケーションが取得できるように、heroku CLIを使って設定します。
+
+```sh
+$ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AWS_SECRET_ACCESS_KEY=(potepanecユーザーのSecret access key)
+```
+
+実行後、「最後にHeroku上にコードをデプロイします。...」までスキップしてください。
 
 ### 2022年10月31日以降に最終課題に入られた方はこちら
 
@@ -180,10 +186,6 @@ $ git remote add heroku (Git URL)
 次に、事前に準備したAWS S3バケットへの接続情報を`potepanec`アプリケーションが取得できるように、heroku CLIを使って設定します。
 
 ```sh
-※2022年10月30日以前に最終課題に入られた方はこちらを実行ください。
-$ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AWS_SECRET_ACCESS_KEY=(potepanecユーザーのSecret access key)
-
-※2022年10月31日以降に最終課題に入られた方はこちらを実行ください。
 $ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AWS_SECRET_ACCESS_KEY=(potepanecユーザーのSecret access key) -a (アプリケーション名)
 ```
 
@@ -231,13 +233,23 @@ Railsでは[環境毎に異なる設定を持たせることが可能](https://r
 
 Herokuには[JawsDB](https://elements.heroku.com/addons/jawsdb)というMySQLデータベースを作成するためのプラグインが存在するため、これを利用します。
 
+### 2022年10月30日以前に最終課題に入られた方はこちら
+
 **2022年10月30日以前に最終課題に入られている場合**、JawsDBを利用するためにHerokuにクレジットカード情報を登録する必要があります(※実際に料金が請求されることはないので安心してください)。
 
 [Herokuのアカウント情報](https://dashboard.heroku.com/account/billing)にアクセスし、クレジットカード情報を登録してください。
 
-※**2022年10月31日以降に最終課題に入られている場合、クレジットカード情報の登録は不要です**ので、このまま以下のコマンドを実行してください。
+登録が完了したら以下のコマンドを実行してください。
 
-登録が完了したら以下のコマンドを実行します。
+```sh
+$ heroku addons:create jawsdb:kitefin
+```
+
+実行後、「次にRailsに作成したデータベースの接続情報を追加していきます。...」までスキップしてください。
+
+### 2022年10月31日以降に最終課題に入られた方はこちら
+
+**2022年10月31日以降に最終課題に入られている場合、クレジットカード情報の登録は不要です**ので、このまま以下のコマンドを実行してください。
 
 ```sh
 $ heroku addons:create jawsdb:kitefin
