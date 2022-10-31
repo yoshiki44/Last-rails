@@ -111,7 +111,7 @@ $ aws s3 mb s3://potepanec
 make_bucket: potepanec
 $ aws s3api put-bucket-acl --bucket potepanec --acl public-read
 $ aws s3 ls
-2019-10-12 10:20:01 potepanec
+YYYY-MM-DD HH:MM:SS potepanec
 ```
 
 3つ目のコマンドで作成したバケットが表示されれば完了です。
@@ -215,7 +215,7 @@ URLはHerokuによって自動的に生成されます。このURLがあなた�
 ```sh
 $ heroku logs --source=app --tail
 ...
-2019-10-09T22:58:43.09581+00:00 app[web.1]: F, [2019-10-09T22:58:43.095741 #4] FATAL -- : [a5c760b6-7ccb-4009-9b26-b66de590879c] Mysql2::Error::ConnectionError (Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)):
+FATAL -- : [a5c760b6-7ccb-4009-9b26-b66de590879c] Mysql2::Error::ConnectionError (Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)):
 ...
 ```
 
@@ -275,7 +275,7 @@ $ git push heroku testbranch:master
 ```sh
 $ heroku logs --source=app --tail
 ...
-2019-10-09T23:45:05.229224+00:00 app[web.1]: F, [2019-10-09T23:45:05.229087 #4] FATAL -- : [dc87c41d-991b-4104-832d-5be8179f7150] ActiveRecord::StatementInvalid (Mysql2::Error: Table 'bcylltkygs644e41.spree_stores' doesn't exist: SHOW FULL FIELDS FROM `spree_stores`):
+FATAL -- : [dc87c41d-991b-4104-832d-5be8179f7150] ActiveRecord::StatementInvalid (Mysql2::Error: Table 'bcylltkygs644e41.spree_stores' doesn't exist: SHOW FULL FIELDS FROM `spree_stores`):
 ...
 ```
 
