@@ -197,10 +197,14 @@ $ git push heroku testbranch:master
 デプロイが無事完了すると以下のようなメッセージが表示されます。
 
 ```
-https://nameless-plateau-03743.herokuapp.com/ deployed to Heroku
+※2022年10月30日以前に最終課題に入られた方の場合
+https://(ランダム値).herokuapp.com/ deployed to Heroku
+
+※2022年10月31日以降に最終課題に入られた方の場合
+https://(アプリケーション名).herokuapp.com/ deployed to Heroku
 ```
 
-URLはHerokuによってランダムに割り当てられます。このURLがあなたのアプリケーションのURLとなります。
+URLはHerokuによって自動的に生成されます。このURLがあなたのアプリケーションのURLとなります。
 試しにブラウザでアクセスしてみましょう。
 
 ![heroku 500](../images/deploy/heroku_500.png)
