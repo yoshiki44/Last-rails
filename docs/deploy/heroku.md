@@ -29,11 +29,13 @@ Herokuアカウントを既にお持ちか否かで設定手順が異なって�
 
 このメールの中に `Accept Invitation`というボタンがありますので、そちらをクリックしてください。
 
-その後、以下のパスワード設定ページへ遷移しますので、ポリシーに沿ったパスワードを設定してください。
+その後、以下のようなアカウント作成ページ或いはパスワード設定ページへ遷移しますので、必要事項を記入してください。
+
+![アカウント作成ページ](https://res.cloudinary.com/he3zvdcui/image/upload/v1667202626/Heroku%20Set%20Up/create_your_account_rgcvdd.png)
 
 ![パスワード設定ページ](https://res.cloudinary.com/he3zvdcui/image/upload/v1667191171/Heroku%20Set%20Up/set_your_password_bctfof.png)
 
-サインイン後、以下の利用規約ページへ遷移しますので、設定は変更せずそのまま`Accept`ボタンをクリックしてください。
+設定完了後、フォーム下部のボタンをクリックすると以下の利用規約ページへ遷移しますので、設定は変更せずそのまま`Accept`ボタンをクリックしてください。
 
 ![利用規約ページ](https://res.cloudinary.com/he3zvdcui/image/upload/v1667191190/Heroku%20Set%20Up/terms_of_service_w1nfiv.png)
 
