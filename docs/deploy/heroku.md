@@ -8,6 +8,7 @@
 # 準備
 ## Herokuユーザー登録
 最終課題に入るタイミングでHerokuより以下の件名の招待メールが送信されています。
+（※**2022年10月30日以前に最終課題に入られた方には招待メールは送信されておりません**ので、「Heroku CLIをインストール」までスキップしてください。）
 
 「Invitation to collaborate on (アプリケーション名)」
 
@@ -109,7 +110,20 @@ $ git commit -a -m "Configure Active Storage to use S3"
 
 # 初めてのデプロイ
 ## HerokuへDeploy
-うまくいくかどうかわかりませんが、まずはHerokuにデプロイするまでの手順を一通り行ってみましょう。
+まずはHerokuにデプロイするまでの手順を一通り行ってみましょう。
+（※**最終課題に入られたタイミングが2022年10月30日以前か否かで実行手順が異なっております**のでご注意ください。）
+
+### 2022年10月30日以前に最終課題に入られた方はこちら
+
+まずはHeroku上に空のアプリケーションを作成します。
+
+```sh
+$ heroku create --stack heroku-20
+```
+
+実行後、「次に、上記で準備したAWS S3バケットへの接続情報を...」までスキップしてください。
+
+### 2022年10月31日以降に最終課題に入られた方はこちら
 
 まずは各受講生向けに用意されているHerokuアプリケーション情報を確認します。
 
@@ -125,9 +139,13 @@ $ heroku info -a (アプリケーション名)
 $ git remote add heroku (Git URL)
 ```
 
-次にHerokuにデプロイした時に、準備しておいたAWS S3バケットへの接続情報を、potepanecアプリケーションが取得できるようにheroku CLIを使って設定します。
+次に、上記で準備したAWS S3バケットへの接続情報をpotepanecアプリケーションが取得できるように、heroku CLIを使って設定します。
 
 ```sh
+※2022年10月30日以前に最終課題に入られた方はこちらを実行ください。
+$ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AWS_SECRET_ACCESS_KEY=(potepanecユーザーのSecret access key)
+
+※2022年10月31日以降に最終課題に入られた方はこちらを実行ください。
 $ heroku config:set AWS_ACCESS_KEY_ID=(potepanecユーザーのAccess key ID) AWS_SECRET_ACCESS_KEY=(potepanecユーザーのSecret access key) -a (アプリケーション名)
 ```
 
