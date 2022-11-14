@@ -82,9 +82,9 @@ HerokuのWebページにログインし、右上の自分のアイコンから`A
 
 ![circleci_env_var](../images/CI/circleci_env_var.png)
 
-次に[ローカルからHerokuにデプロイする設定](../deploy/heroku.md)で取得したAWSの認証情報を追加します。
+次に[ローカルからHerokuにデプロイする設定](../deploy/heroku.md)で取得したHerokuアプリ名とAWSの認証情報を追加します。
 
-同じようにCircleCIの歯車アイコンから`Add Variables`を選択し、`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`、という名前でそれぞれ環境変数を追加します。
+同じようにCircleCIの歯車アイコンから`Add Variables`を選択し、`HEROKU_APP_NAME`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`、という名前でそれぞれ環境変数を追加します。
 
 以上で設定は完了です!
 
