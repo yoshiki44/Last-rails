@@ -61,30 +61,12 @@ jobs:
       - build-tools/install-ci-tools
       - jq/install
       - run:
-          name: Identify who I am
-          command: echo 'export MY_EMAIL=`heroku auth:whoami | tail -n 1`' >> $BASH_ENV
-      - run:
-          name: Identify Heroku app names to destroy
-          command: echo 'export APP_NAMES_TO_REMOVE=`heroku apps --json | jq -r "map(select(.owner.email == "\"$MY_EMAIL\"" and (.name | contains(\"potepanec\")))) | sort_by(.updated_at) | reverse | .[5:] | .[].name"`' >> $BASH_ENV
-      - run:
-          name: Delete old apps if needed
-          command: for app_name in $APP_NAMES_TO_REMOVE; do heroku apps:destroy -a $app_name -c $app_name; done
-      - run:
-          name: Define Heroku app name to create
-          command: timestamp=`date +%Y%m%d%H%M%S` && echo "export HEROKU_APP_NAME=potepanec-$timestamp" >> $BASH_ENV
-      - run:
-          name: Create fresh Heroku app
-          command: heroku apps:create $HEROKU_APP_NAME --addons=jawsdb:kitefin --stack heroku-20
-      - run:
           name: Deploy
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
       - run:
           name: Run post-deploy tasks
           command: |
-            heroku config:set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-            heroku run bin/rails db:migrate
-            heroku run bin/rails runner "['products', 'taxons', 'option_values', 'product_option_types', 'product_properties', 'variants', 'assets'].each { |table| Spree::Sample.load_sample(table) }"
-            heroku run bin/rails runner db/seeds/potepan_suggest.rb
+            heroku run bin/rails db:migrate -a $HEROKU_APP_NAME
 
 orbs:
   build-tools: circleci/build-tools@2.6.3
