@@ -1,7 +1,9 @@
 # Herokuデプロイ手順
+
 ここではローカル環境で動作させているpotepanecアプリケーションをHerokuにデプロイする手順を説明します。
 
 # ゴール
+
 - ローカルと同じ動作がHeroku上でも実現できていること
 - ユニークなURLが生成され、誰でもアクセス出来る状態になっていること
 
@@ -75,17 +77,27 @@ IAMはAWSサービスの1つで、簡単に言うと先ほど作成したAWSア�
 
 まずは[AWS IAM](https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/home)のページにアクセスします。
 
-左のメニューから`User`->`Add user`を選択し、以下の情報を入力してください。
+左のメニューから`Users`->`Add users`を選択し、以下の手順でユーザーの作成を進めてください。
 
-- User nameは`potepanec`
-- Access typeは`Programmatic access`にチェックを入れる
-- Add permission -> Attach existing policies directly から`AmazonS3FullAccess`を選択する
-- Tagは何も入れなくてOK
+1. `User name`に`potepanec`を入力し、次へ進む（※`Enable console access`のチェックは不要です。）
+2. `Permissions options`で`Attach policies directly`を選択する
+3. `Permissions policies`から`AmazonS3FullAccess`を選択し、次へ進む
+4. `Tags`には何も入れず、`Create user`をクリックする
 
-ユーザーが作成されると`Download .csv`からアクセス情報をダウンロードしておきましょう。
-このファイルは後にpotepanecアプリケーションとAWS連携させる際に必要になるのでどこかに保存しておいてください。
+無事ユーザーが作成されましたので、続いて、以下の手順でアクセス情報を生成していきます。
+
+1. ユーザー一覧より、`potepanec`をクリックする
+2. `Security credentials`のタブをクリックする
+3. ページ中段の`Access keys`セクションの`create access key`をクリックする
+4. `Access key best practices & alternatives`で`Other`を選択し、次へ進む
+5. `Description tag`には何も入れず、`Create access key`をクリックする
+6. `Download .csv file`をクリックし、アクセス情報をダウンロードする
+
+このファイルは後にpotepanecアプリケーションとAWSを連携させる際に必要になるため、どこかに保存しておいてください。
+（※秘匿情報ですので、他人には公開しないでください。）
 
 ### S3バケットの作成
+
 バケット(bucket)とはS3上のフォルダのようなもので、ファイルを保存したり、さらにその下にフォルダを作成することができます。
 
 AWS CLIを使ってバケットを作成するので、まずはAWS CLIをインストールしましょう。
