@@ -1,4 +1,8 @@
 version: 2.1
+
+orbs:
+  heroku: circleci/heroku@2.0
+
 jobs:
   rspec:
     working_directory: ~/potepanec
@@ -53,13 +57,11 @@ jobs:
 
   heroku_deploy:
     working_directory: ~/potepanec
-    docker:
-      - image: sue445/heroku-cli
+    executor: heroku/default
     resource_class: small
     steps:
       - checkout
-      - build-tools/install-ci-tools
-      - jq/install
+      - heroku/install
       - run:
           name: Deploy
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
@@ -68,9 +70,6 @@ jobs:
           command: |
             heroku run bin/rails db:migrate -a $HEROKU_APP_NAME
 
-orbs:
-  build-tools: circleci/build-tools@2.6.3
-  jq: circleci/jq@1.9.1
 workflows:
   version: 2.1
   build:
