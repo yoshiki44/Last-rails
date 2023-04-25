@@ -111,7 +111,7 @@ $ brew install awscli
 ```sh
 $ aws configure
 AWS Access Key ID [None]: （potepanecユーザーのAccess key ID）
-AWS Secret Access Key [None]: （potepanecユーザーののSecret access key）
+AWS Secret Access Key [None]: （potepanecユーザーのSecret access key）
 Default region name [None]: ap-northeast-1
 Default output format [None]: json
 ```
@@ -123,12 +123,14 @@ Default output format [None]: json
 ```sh
 $ aws s3 mb s3://potepanec
 make_bucket: potepanec
+$ aws s3api put-public-access-block --bucket potepanec --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false"
+$ aws s3api put-bucket-ownership-controls --bucket potepanec --ownership-controls Rules=[{ObjectOwnership=ObjectWriter}]
 $ aws s3api put-bucket-acl --bucket potepanec --acl public-read
 $ aws s3 ls
 YYYY-MM-DD HH:MM:SS potepanec
 ```
 
-3つ目のコマンドで作成したバケットが表示されれば完了です。
+最後のコマンドでバケットの名前が表示されれば設定は完了です。
 
 ### Active Storageの設定
 
