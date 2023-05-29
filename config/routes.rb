@@ -8,6 +8,7 @@ mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platf
   mount Spree::Core::Engine, at: '/'
 
   namespace :potepan do
+    get 'products/:id',             to: 'products#show'
     get '/',                        to: 'sample#index'
     get 'index',                    to: 'sample#index'
     get :product_grid_left_sidebar, to: 'sample#product_grid_left_sidebar'
