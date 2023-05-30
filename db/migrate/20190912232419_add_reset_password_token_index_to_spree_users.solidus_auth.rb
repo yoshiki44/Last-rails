@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from solidus_auth (originally 20190125170630)
 
 class AddResetPasswordTokenIndexToSpreeUsers < SolidusSupport::Migration[4.2]
@@ -28,8 +29,6 @@ class AddResetPasswordTokenIndexToSpreeUsers < SolidusSupport::Migration[4.2]
   end
 
   def down
-    if custom_index_exists?
-      remove_index :spree_users, name: custom_index_name
-    end
+    remove_index :spree_users, name: custom_index_name if custom_index_exists?
   end
 end

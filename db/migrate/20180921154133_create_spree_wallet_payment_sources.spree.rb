@@ -10,7 +10,7 @@ class CreateSpreeWalletPaymentSources < ActiveRecord::Migration[4.2]
         :user,
         foreign_key: { to_table: Spree.user_class.table_name },
         index: true,
-        null: false,
+        null: false
       )
       t.references :payment_source, polymorphic: true, null: false
       t.boolean :default, default: false, null: false
@@ -20,9 +20,9 @@ class CreateSpreeWalletPaymentSources < ActiveRecord::Migration[4.2]
 
     add_index(
       :spree_wallet_payment_sources,
-      [:user_id, :payment_source_id, :payment_source_type],
+      %i(user_id payment_source_id payment_source_type),
       unique: true,
-      name: 'index_spree_wallet_payment_sources_on_source_and_user',
+      name: 'index_spree_wallet_payment_sources_on_source_and_user'
     )
   end
 end
