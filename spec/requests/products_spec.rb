@@ -40,13 +40,7 @@ RSpec.describe 'Products', type: :request do
     end
 
     it '商品画像の取得＆表示' do
-      # expect(response.body).to include product.images
-      # product.images.each { |image| expect(response.body).to include image.attachment(:product) }
       expect(response.body).to include filename
     end
   end
-
-  #  describe "GET /index" do
-  #    pending "add some examples (or delete) #{__FILE__}"
-  #  end
 end

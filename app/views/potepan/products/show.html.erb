@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <body>
-  <!-- LIGHT SECTION -->
   <section class="lightSection clearfix pageHeader">
     <div class="container">
       <div class="row">
@@ -20,8 +19,6 @@
       </div>
     </div>
   </section>
-
-  <!-- MAIN CONTENT SECTION -->
   <section class="mainContent clearfix">
     <div class="container">
       <div class="row singleProduct">
@@ -60,7 +57,6 @@
             <div class="media-body">
               <ul class="list-inline">
                 <li><a><i class="fa fa-reply" aria-hidden="true"></i><%= link_to "一覧ページへ戻る", "/potepan/index" %></a></li>
-                <!-- <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Share This</a></li> -->
               </ul>
               <h2><%= @product.name %></h2>
               <h3><%= @product.display_price %></h3>
@@ -75,7 +71,6 @@
               </span>
               <span class="quick-drop resizeWidth">
                 <select name="guiest_id4" id="guiest_id4" class="select-drop">
-                <!--   <option value="0">Qty</option> -->
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -84,34 +79,6 @@
               <div class="btn-area">
                 <a href="cart_page.html" class="btn btn-primary btn-block">カートへ入れる<i class="fa fa-angle-right" aria-hidden="true"></i></a>
               </div>
-              <!-- <div class="tabArea">
-                <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#details">details</a></li>
-                  <li><a data-toggle="tab" href="#about-art">about art</a></li>
-                  <li><a data-toggle="tab" href="#sizing">sizing</a></li>
-                  <li><a data-toggle="tab" href="#shipping">shipping</a></li>
-                </ul>
-                <div class="tab-content">
-                  <div id="details" class="tab-pane fade in active">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <ul class="list-unstyled">
-                      <li>Black, Crew Neck</li>
-                      <li>75% Cotton, 25% Rayon</li>
-                      <li>Waterbased Ink</li>
-                      <li>Wash Cold, dry low</li>
-                    </ul>
-                  </div>
-                  <div id="about-art" class="tab-pane fade">
-                    <p>Nulla facilisi. Mauris efficitur, massa et iaculis accumsan, mauris velit ultrices purus, quis condimentum nibh dolor ut tortor. Donec egestas tortor quis mattis gravida. Ut efficitur elit vitae dignissim volutpat. </p>
-                  </div>
-                  <div id="sizing" class="tab-pane fade">
-                    <p>Praesent dui felis, gravida a auctor at, facilisis commodo ipsum. Cras eu faucibus justo. Nullam varius cursus nisi, sed elementum sem sagittis at. Nulla tellus massa, vestibulum a commodo facilisis, pulvinar convallis nunc.</p>
-                  </div>
-                  <div id="shipping" class="tab-pane fade">
-                    <p>Mauris lobortis augue ex, ut faucibus nisi mollis ac. Sed volutpat scelerisque ex ut ullamcorper. Cras at velit quis sapien dapibus laoreet a id odio. Sed sit amet accumsan ante, eu congue metus. Aenean eros tortor, cursus quis feugiat sed, vestibulum vel purus.</p>
-                  </div>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -169,9 +136,6 @@
       </div>
     </div>
   </section>
-
-  <!-- FOOTER -->
-  <!-- COPY RIGHT -->
   <div id="footer" class="copyRight clearfix">
     <div class="container">
       <div class="row">
@@ -187,8 +151,6 @@
       </div>
     </div>
   </div>
-
-  <!-- LOGIN MODAL -->
   <div class="modal fade" id="login" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -218,8 +180,6 @@
       </div>
     </div>
   </div>
-
-  <!-- SIGN UP MODAL -->
   <div class="modal fade" id="signup" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
