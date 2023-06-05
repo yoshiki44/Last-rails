@@ -1,210 +1,206 @@
 <!DOCTYPE html>
-<body>
-  <section class="lightSection clearfix pageHeader">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-6">
-          <div class="page-title">
-            <h2><%= @product.name %></h2>
-          </div>
-        </div>
-        <div class="col-xs-6">
-          <ol class="breadcrumb pull-right">
-            <li>
-              <a><%= link_to "Home", "/potepan/index" %></a>
-            </li>
-            <li class="active"><%= @product.name %></li>
-          </ol>
+<% content_for(:title, '商品詳細ページ') %>
+
+<section class="lightSection clearfix pageHeader">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="page-title">
+          <h2><%= @product.name %></h2>
         </div>
       </div>
+      <div class="col-xs-6">
+        <ol class="breadcrumb pull-right">
+          <li>
+            <a><%= link_to "Home", potepan_path %></a>
+          </li>
+          <li class="active"><%= @product.name %></li>
+        </ol>
+      </div>
     </div>
-  </section>
-  <section class="mainContent clearfix">
-    <div class="container">
-      <div class="row singleProduct">
-        <div class="col-xs-12">
-          <div class="media">
-            <div class="media-left productSlider">
-              <div id="carousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="item active" data-thumb="0">
-                    <%= image_tag @product.images.first.attachment(:product) %>
+  </div>
+</section>
+<section class="mainContent clearfix">
+  <div class="container">
+    <div class="row singleProduct">
+      <div class="col-xs-12">
+        <div class="media">
+          <div class="media-left productSlider">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <% @product.images.each_with_index do |image, index| %>
+                  <div class="item <%= "active" if index == 0 %>" data-thumb="<%= index %>">
+                    <%= image_tag image.attachment(:product), itemprop: "image" %>
                   </div>
-                  <% if @product.images.second %>
-                    <div class="item" data-thumb="1">
-                      <%= image_tag @product.images.second.attachment(:product) %>
-                    </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="clearfix">
+              <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                <div class="carousel-inner">
+                  <% @product.images.each_with_index do |image, index| %>
+                    <div data-target="#carousel" data-slide-to="<%= index %>" class="thumb"><%= image_tag image.attachment(:product) %></div>
                   <% end %>
                 </div>
-              </div>
-              <div class="clearfix">
-                <div id="thumbcarousel" class="carousel slide" data-interval="false">
-                  <div class="carousel-inner">
-                      <div data-target="#carousel" data-slide-to="0" class="thumb"><%= image_tag @product.images.first.attachment(:product) %></div>
-                      <% if @product.images.second %>
-                        <div data-target="#carousel" data-slide-to="1" class="thumb"><%= image_tag @product.images.second.attachment(:product) %></div>
-                      <% end %>
-                  </div>
-                  <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                  </a>
-                  <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="media-body">
-              <ul class="list-inline">
-                <li><a><i class="fa fa-reply" aria-hidden="true"></i><%= link_to "一覧ページへ戻る", "/potepan/index" %></a></li>
-              </ul>
-              <h2><%= @product.name %></h2>
-              <h3><%= @product.display_price %></h3>
-              <p><%= @product.description %></p>
-              <span class="quick-drop">
-                <select name="guiest_id3" id="guiest_id3" class="select-drop">
-                  <option value="0">S</option>
-                  <option value="1">M</option>
-                  <option value="2">L</option>
-                  <option value="3">XL</option>
-                </select>
-              </span>
-              <span class="quick-drop resizeWidth">
-                <select name="guiest_id4" id="guiest_id4" class="select-drop">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              </span>
-              <div class="btn-area">
-                <a href="cart_page.html" class="btn btn-primary btn-block">カートへ入れる<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row productsContent">
-        <div class="col-xs-12">
-          <div class="page-header">
-            <h4>関連商品</h4>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="productBox">
-            <div class="productImage clearfix">
-              <%= image_tag("img/products/products-01.jpg", :alt => "products-img") %>
-            </div>
-            <div class="productCaption clearfix">
-             <h5>Nike Sportswear</h5>
-             <h3>199円</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="productBox">
-            <div class="productImage clearfix">
-              <%= image_tag("img/products/products-02.jpg", :alt => "products-img") %>
-            </div>
-            <div class="productCaption clearfix">
-             <h5>Dip Dyed Sweater</h5>
-             <h3>249円</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="productBox">
-            <div class="productImage clearfix">
-              <%= image_tag("img/products/products-03.jpg", :alt => "products-img") %>
-            </div>
-            <div class="productCaption clearfix">
-             <h5>Scarf Ring Corner</h5>
-             <h3>179円</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="productBox">
-            <div class="productImage clearfix">
-              <%= image_tag("img/products/products-04.jpg", :alt => "products-img") %>
-            </div>
-            <div class="productCaption clearfix">
-             <h5>Sun Buddies</h5>
-             <h3>149円</h3>
+          <div class="media-body">
+            <ul class="list-inline">
+              <li><a><i class="fa fa-reply" aria-hidden="true"></i><%= link_to "一覧ページへ戻る", potepan_path %></a></li>
+            </ul>
+            <h2><%= @product.name %></h2>
+            <h3><%= @product.display_price %></h3>
+            <p><%= @product.description %></p>
+            <span class="quick-drop">
+              <select name="guiest_id3" id="guiest_id3" class="select-drop">
+                <option value="0">S</option>
+                <option value="1">M</option>
+                <option value="2">L</option>
+                <option value="3">XL</option>
+              </select>
+            </span>
+            <span class="quick-drop resizeWidth">
+              <select name="guiest_id4" id="guiest_id4" class="select-drop">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </span>
+            <div class="btn-area">
+              <a href="cart_page.html" class="btn btn-primary btn-block">カートへ入れる<i class="fa fa-angle-right" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <div id="footer" class="copyRight clearfix">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-7 col-xs-12">
-          <p>&copy; 2016-<%= Time.now.year %> Copyright Potepan Store .</p>
+    <div class="row productsContent">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h4>関連商品</h4>
         </div>
-        <div class="col-sm-5 col-xs-12">
-          <ul class="list-inline">
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-          </ul>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-01.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+           <h5>Nike Sportswear</h5>
+           <h3>199円</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-02.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+           <h5>Dip Dyed Sweater</h5>
+           <h3>249円</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-03.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+           <h5>Scarf Ring Corner</h5>
+           <h3>179円</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-04.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+           <h5>Sun Buddies</h5>
+           <h3>149円</h3>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="login" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h3 class="modal-title">log in</h3>
-        </div>
-        <div class="modal-body">
-          <form action="" method="POST" role="form">
-            <div class="form-group">
-              <label for="login-email">Enter Email</label>
-              <input type="email" class="form-control" id="login-email">
-            </div>
-            <div class="form-group">
-              <label for="login-password">Password</label>
-              <input type="password" class="form-control" id="login-password">
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Remember Me
-              </label>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">log in</button>
-            <button type="button" class="btn btn-link btn-block">Forgot Password?</button>
-          </form>
-        </div>
+</section>
+<div id="footer" class="copyRight clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-7 col-xs-12">
+        <p>&copy; 2016-<%= Time.now.year %> Copyright Potepan Store .</p>
+      </div>
+      <div class="col-sm-5 col-xs-12">
+        <ul class="list-inline">
+          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        </ul>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="signup" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h3 class="modal-title">Create an account</h3>
-        </div>
-        <div class="modal-body">
-          <form action="" method="POST" role="form">
-            <div class="form-group">
-              <label for="signup-email">Enter Email</label>
-              <input type="email" class="form-control" id="signup-email">
-            </div>
-            <div class="form-group">
-              <label for="signup-password">Password</label>
-              <input type="password" class="form-control" id="signup-password">
-            </div>
-            <div class="form-group">
-              <label for="signup-password-confirmation">Confirm Password</label>
-              <input type="password" class="form-control" id="signup-password-confirmation">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Sign up</button>
-          </form>
-        </div>
+</div>
+<div class="modal fade" id="login" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">log in</h3>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" role="form">
+          <div class="form-group">
+            <label for="login-email">Enter Email</label>
+            <input type="email" class="form-control" id="login-email">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" class="form-control" id="login-password">
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">log in</button>
+          <button type="button" class="btn btn-link btn-block">Forgot Password?</button>
+        </form>
       </div>
     </div>
   </div>
-</body>
+</div>
+<div class="modal fade" id="signup" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">Create an account</h3>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" role="form">
+          <div class="form-group">
+            <label for="signup-email">Enter Email</label>
+            <input type="email" class="form-control" id="signup-email">
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" class="form-control" id="signup-password">
+          </div>
+          <div class="form-group">
+            <label for="signup-password-confirmation">Confirm Password</label>
+            <input type="password" class="form-control" id="signup-password-confirmation">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

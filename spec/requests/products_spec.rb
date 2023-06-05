@@ -20,7 +20,7 @@ RSpec.describe 'Products', type: :request do
   describe 'GET /show' do
     before do
       product.images << image
-      get potepan_path(product.id)
+      get potepan_product_path(product.id)
     end
 
     it '商品詳細ページの表示' do
