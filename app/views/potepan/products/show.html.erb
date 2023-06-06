@@ -29,7 +29,7 @@
             <div id="carousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <% @product.images.each_with_index do |image, index| %>
-                  <div class="item <%= "active" if index == 0 %>" data-thumb="<%= index %>">
+                  <div class="item <%= "active" if index.zero? %>" data-thumb="<%= index %>">
                     <%= image_tag image.attachment(:product), itemprop: "image" %>
                   </div>
                 <% end %>
@@ -137,7 +137,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-7 col-xs-12">
-        <p>&copy; 2016-<%= Time.now.year %> Copyright Potepan Store .</p>
+        <p>&copy; 2016-<%= Time.current.year %> Copyright Potepan Store .</p>
       </div>
       <div class="col-sm-5 col-xs-12">
         <ul class="list-inline">
