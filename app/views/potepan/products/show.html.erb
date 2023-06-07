@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<% content_for(:title, '商品詳細ページ') %>
+<% content_for(:title, @product.name) %>
 
-<section class="lightSection clearfix pageHeader">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-6">
-        <div class="page-title">
-          <h2><%= @product.name %></h2>
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <ol class="breadcrumb pull-right">
-          <li>
-            <a><%= link_to "Home", potepan_path %></a>
-          </li>
-          <li class="active"><%= @product.name %></li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
+<%= render partial: "layouts/pageheader", locals: { name: @product.name }%>
 <section class="mainContent clearfix">
   <div class="container">
     <div class="row singleProduct">
@@ -133,21 +114,6 @@
     </div>
   </div>
 </section>
-<div id="footer" class="copyRight clearfix">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-7 col-xs-12">
-        <p>&copy; 2016-<%= Time.current.year %> Copyright Potepan Store .</p>
-      </div>
-      <div class="col-sm-5 col-xs-12">
-        <ul class="list-inline">
-          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="modal fade" id="login" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">

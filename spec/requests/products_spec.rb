@@ -23,23 +23,23 @@ RSpec.describe 'Products', type: :request do
       get potepan_product_path(product.id)
     end
 
-    it '商品詳細ページの表示' do
+    it '商品詳細ページの表示に成功すること' do
       expect(response).to have_http_status 200
     end
 
-    it '商品名の取得＆表示' do
+    it '商品名の取得に成功すること' do
       expect(response.body).to include product.name
     end
 
-    it '商品単価の取得＆表示' do
+    it '商品単価の取得に成功すること' do
       expect(response.body).to include product.display_price.to_s
     end
 
-    it '商品説明の取得＆表示' do
+    it '商品説明の取得に成功すること' do
       expect(response.body).to include product.description
     end
 
-    it '商品画像の取得＆表示' do
+    it '商品画像の取得に成功すること' do
       expect(response.body).to include filename
     end
   end
