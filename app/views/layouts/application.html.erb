@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield(:title) %></title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
   </head>
   <body>
-    <%= render partial: "layouts/header" %>
+    <%= render "shared/header" %>
     <%= yield %>
-    <%= render partial: "layouts/footer" %>
+    <%= render "shared/footer" %>
     <%= javascript_include_tag 'application' %>
   </body>
 </html>

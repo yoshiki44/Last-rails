@@ -1,6 +1,5 @@
-<% content_for(:title, @product.name) %>
-
-<%= render partial: "layouts/pageheader", locals: { product_name: @product.name } %>
+<%= render "shared/page_title", page_title: @product.name %>
+<%= render "shared/pageheader", product_name: @product.name %>
 <section class="mainContent clearfix">
   <div class="container">
     <div class="row singleProduct">
@@ -114,4 +113,4 @@
     </div>
   </div>
 </section>
-<%= render partial: "layouts/modal" %>
+<%= render "shared/modal" %>
