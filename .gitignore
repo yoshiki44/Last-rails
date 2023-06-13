@@ -198,5 +198,3 @@ crashlytics-build.properties
 fabric.properties
 
 /storage/*
-
-spec/examples.txt

@@ -2,19 +2,13 @@ require 'rails_helper'
 require 'spree/testing_support/factories'
 
 RSpec.describe 'Products', type: :request do
-  let!(:product) { create(:product) }
-  let!(:image) { create(:image) }
+  let(:product) { create(:product) }
+  let(:image) { create(:image) }
   # 画像URLの取得が上手くいかない問題への対応
   # https://mng-camp.potepan.com/curriculums/document-for-final-task-2#notes-of-image-test
   let!(:filename) do
     filename = image.attachment_blob.filename
     "#{filename.base}#{filename.extension_with_delimiter}"
-  end
-
-  describe 'GET /index' do
-    it 'TOPページへのリンク' do
-      get potepan_index_path
-    end
   end
 
   describe 'GET /show' do

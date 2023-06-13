@@ -1,4 +1,4 @@
-<%= render "shared/page_title", page_title: @product.name %>
+<% provide(:title, @product.name) %>
 <%= render "shared/pageheader", product_name: @product.name %>
 <section class="mainContent clearfix">
   <div class="container">
@@ -10,7 +10,7 @@
               <div class="carousel-inner">
                 <% @product.images.each_with_index do |image, index| %>
                   <div class="item <%= "active" if index.zero? %>" data-thumb="<%= index %>">
-                    <%= image_tag image.attachment(:product), itemprop: "image" %>
+                    <%= image_tag image.attachment(:large), itemprop: "image" %>
                   </div>
                 <% end %>
               </div>
@@ -113,4 +113,3 @@
     </div>
   </div>
 </section>
-<%= render "shared/modal" %>
