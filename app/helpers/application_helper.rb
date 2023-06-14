@@ -1,5 +1,5 @@
 module ApplicationHelper
-  BASE_TITLE = "BIGBAG Store".freeze
+  BASE_TITLE = 'BIGBAG Store'.freeze
 
   def full_title(page_title)
     if page_title.blank?

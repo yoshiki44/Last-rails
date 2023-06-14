@@ -2,6 +2,6 @@
 class AddUnconfirmedEmailToSpreeUsers < SolidusSupport::Migration[5.1]
   def change
     add_column :spree_users, :unconfirmed_email, :string unless column_exists?(:spree_users,
-:unconfirmed_email)
+                                                                               :unconfirmed_email)
   end
 end

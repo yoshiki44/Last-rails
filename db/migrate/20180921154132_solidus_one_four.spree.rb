@@ -96,13 +96,13 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.integer 'adjustment_reason_id'
       t.boolean 'finalized', default: false, null: false
       t.index %w(adjustable_id adjustable_type),
-name: 'index_spree_adjustments_on_adjustable_id_and_adjustable_type'
+              name: 'index_spree_adjustments_on_adjustable_id_and_adjustable_type'
       t.index ['adjustable_id'], name: 'index_adjustments_on_order_id'
       t.index ['eligible'], name: 'index_spree_adjustments_on_eligible'
       t.index ['order_id'], name: 'index_spree_adjustments_on_order_id'
       t.index ['promotion_code_id'], name: 'index_spree_adjustments_on_promotion_code_id'
       t.index %w(source_id source_type),
-name: 'index_spree_adjustments_on_source_id_and_source_type'
+              name: 'index_spree_adjustments_on_source_id_and_source_type'
     end
 
     create_table 'spree_assets', force: :cascade do |t|
@@ -131,7 +131,7 @@ name: 'index_spree_adjustments_on_source_id_and_source_type'
       t.datetime 'updated_at', precision: 6
       t.text 'preferences'
       t.index %w(calculable_id calculable_type),
-name: 'index_spree_calculators_on_calculable_id_and_calculable_type'
+              name: 'index_spree_calculators_on_calculable_id_and_calculable_type'
       t.index %w(id type), name: 'index_spree_calculators_on_id_and_type'
     end
 
@@ -148,7 +148,7 @@ name: 'index_spree_calculators_on_calculable_id_and_calculable_type'
       t.integer 'imported_from_shipment_id'
       t.index ['external_number'], name: 'index_spree_cartons_on_external_number'
       t.index ['imported_from_shipment_id'],
-name: 'index_spree_cartons_on_imported_from_shipment_id', unique: true
+              name: 'index_spree_cartons_on_imported_from_shipment_id', unique: true
       t.index ['number'], name: 'index_spree_cartons_on_number', unique: true
       t.index ['stock_location_id'], name: 'index_spree_cartons_on_stock_location_id'
     end
@@ -242,7 +242,7 @@ name: 'index_spree_cartons_on_imported_from_shipment_id', unique: true
       t.datetime 'created_at', precision: 6
       t.datetime 'updated_at', precision: 6
       t.index %w(source_id source_type),
-name: 'index_spree_log_entries_on_source_id_and_source_type'
+              name: 'index_spree_log_entries_on_source_id_and_source_type'
     end
 
     create_table 'spree_option_type_prototypes', force: :cascade do |t|
@@ -278,7 +278,7 @@ name: 'index_spree_log_entries_on_source_id_and_source_type'
       t.datetime 'created_at', precision: 6
       t.datetime 'updated_at', precision: 6
       t.index %w(variant_id option_value_id),
-name: 'index_option_values_variants_on_variant_id_and_option_value_id'
+              name: 'index_option_values_variants_on_variant_id_and_option_value_id'
       t.index ['variant_id'], name: 'index_spree_option_values_variants_on_variant_id'
     end
 
@@ -341,7 +341,7 @@ name: 'index_option_values_variants_on_variant_id_and_option_value_id'
       t.datetime 'created_at', precision: 6
       t.datetime 'updated_at', precision: 6
       t.index %w(order_id promotion_id),
-name: 'index_spree_orders_promotions_on_order_id_and_promotion_id'
+              name: 'index_spree_orders_promotions_on_order_id_and_promotion_id'
       t.index ['promotion_code_id'], name: 'index_spree_orders_promotions_on_promotion_code_id'
     end
 
@@ -479,7 +479,7 @@ name: 'index_spree_orders_promotions_on_order_id_and_promotion_id'
       t.datetime 'created_at', precision: 6
       t.datetime 'updated_at', precision: 6
       t.index ['promotion_action_id'],
-name: 'index_spree_promotion_action_line_items_on_promotion_action_id'
+              name: 'index_spree_promotion_action_line_items_on_promotion_action_id'
       t.index ['variant_id'], name: 'index_spree_promotion_action_line_items_on_variant_id'
     end
 
@@ -659,7 +659,7 @@ name: 'index_spree_promotion_action_line_items_on_promotion_action_id'
       t.integer 'stock_location_id'
       t.integer 'return_reason_id'
       t.index ['return_reason_id'],
-name: 'index_return_authorizations_on_return_authorization_reason_id'
+              name: 'index_return_authorizations_on_return_authorization_reason_id'
     end
 
     create_table 'spree_return_items', force: :cascade do |t|
@@ -683,7 +683,7 @@ name: 'index_return_authorizations_on_return_authorization_reason_id'
       t.integer 'return_reason_id'
       t.index ['customer_return_id'], name: 'index_return_items_on_customer_return_id'
       t.index ['exchange_inventory_unit_id'],
-name: 'index_spree_return_items_on_exchange_inventory_unit_id'
+              name: 'index_spree_return_items_on_exchange_inventory_unit_id'
     end
 
     create_table 'spree_return_reasons', force: :cascade do |t|
@@ -744,7 +744,7 @@ name: 'index_spree_return_items_on_exchange_inventory_unit_id'
       t.index %w(shipping_category_id shipping_method_id), name: 'unique_spree_shipping_method_categories',
                                                            unique: true
       t.index ['shipping_method_id'],
-name: 'index_spree_shipping_method_categories_on_shipping_method_id'
+              name: 'index_spree_shipping_method_categories_on_shipping_method_id'
     end
 
     create_table 'spree_shipping_method_stock_locations', force: :cascade do |t|
@@ -811,7 +811,7 @@ name: 'index_spree_shipping_method_categories_on_shipping_method_id'
       t.datetime 'created_at', precision: 6
       t.datetime 'updated_at', precision: 6
       t.index %w(stateful_id stateful_type),
-name: 'index_spree_state_changes_on_stateful_id_and_stateful_type'
+              name: 'index_spree_state_changes_on_stateful_id_and_stateful_type'
       t.index ['user_id'], name: 'index_spree_state_changes_on_user_id'
     end
 
@@ -1107,7 +1107,7 @@ name: 'index_spree_state_changes_on_stateful_id_and_stateful_type'
       t.datetime 'updated_at', precision: 6
       t.index ['zone_id'], name: 'index_spree_zone_members_on_zone_id'
       t.index %w(zoneable_id zoneable_type),
-name: 'index_spree_zone_members_on_zoneable_id_and_zoneable_type'
+              name: 'index_spree_zone_members_on_zoneable_id_and_zoneable_type'
     end
 
     create_table 'spree_zones', force: :cascade do |t|

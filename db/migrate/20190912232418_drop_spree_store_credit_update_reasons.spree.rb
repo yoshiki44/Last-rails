@@ -12,8 +12,6 @@ class DropSpreeStoreCreditUpdateReasons < ActiveRecord::Migration[5.1]
   def up
     drop_table :spree_store_credit_update_reasons if table_exists? :spree_store_credit_update_reasons
 
-    if column_exists? :spree_store_credit_events, :update_reason_id
-      remove_column :spree_store_credit_events, :update_reason_id
-    end
+    remove_column :spree_store_credit_events, :update_reason_id if column_exists? :spree_store_credit_events, :update_reason_id
   end
 end

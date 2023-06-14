@@ -1,5 +1,5 @@
 <% provide(:title, @product.name) %>
-<%= render "shared/pageheader", product_name: @product.name %>
+<%= render "potepan/products/pageheader", product_name: @product.name %>
 <section class="mainContent clearfix">
   <div class="container">
     <div class="row singleProduct">
@@ -19,7 +19,9 @@
               <div id="thumbcarousel" class="carousel slide" data-interval="false">
                 <div class="carousel-inner">
                   <% @product.images.each_with_index do |image, index| %>
-                    <div data-target="#carousel" data-slide-to="<%= index %>" class="thumb"><%= image_tag image.attachment(:product) %></div>
+                    <div data-target="#carousel" data-slide-to="<%= index %>" class="thumb">
+                      <%= image_tag image.attachment(:product) %>
+                    </div>
                   <% end %>
                 </div>
                 <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">

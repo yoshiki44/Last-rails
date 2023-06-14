@@ -9,7 +9,7 @@ class CreateActionMailboxTables < ActiveRecord::Migration[6.0]
       t.timestamps
 
       t.index %i(message_id message_checksum),
-name: 'index_action_mailbox_inbound_emails_uniqueness', unique: true
+              name: 'index_action_mailbox_inbound_emails_uniqueness', unique: true
     end
   end
 end
