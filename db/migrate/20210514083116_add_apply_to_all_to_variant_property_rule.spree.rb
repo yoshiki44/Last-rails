@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # This migration comes from spree (originally 20180416083007)
 
 class AddApplyToAllToVariantPropertyRule < ActiveRecord::Migration[5.1]

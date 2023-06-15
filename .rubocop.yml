@@ -4,6 +4,7 @@ LineLength:
 
 AllCops:
   Exclude:
+    - 'db/**/*'
     - 'script/**/*'
     - 'node_modules/**/*'
     - 'bin/*'

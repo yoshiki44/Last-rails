@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # This migration comes from spree (originally 20190220093635)
 
 class DropSpreeStoreCreditUpdateReasons < ActiveRecord::Migration[5.1]
@@ -10,8 +9,12 @@ class DropSpreeStoreCreditUpdateReasons < ActiveRecord::Migration[5.1]
   # of migration 20180710170104 would fail with `table already exists` , as
   # it handles itself the add/remove of this table and column.
   def up
-    drop_table :spree_store_credit_update_reasons if table_exists? :spree_store_credit_update_reasons
+    if table_exists? :spree_store_credit_update_reasons
+      drop_table :spree_store_credit_update_reasons
+    end
 
-    remove_column :spree_store_credit_events, :update_reason_id if column_exists? :spree_store_credit_events, :update_reason_id
+    if column_exists? :spree_store_credit_events, :update_reason_id
+      remove_column :spree_store_credit_events, :update_reason_id
+    end
   end
 end

@@ -5,7 +5,6 @@ class MigrateCreditCardsToWalletPaymentSources < ActiveRecord::Migration[4.2]
   class CreditCard < ActiveRecord::Base
     self.table_name = 'spree_credit_cards'
   end
-
   class WalletPaymentSource < ActiveRecord::Base
     self.table_name = 'spree_wallet_payment_sources'
   end
@@ -26,5 +25,6 @@ class MigrateCreditCardsToWalletPaymentSources < ActiveRecord::Migration[4.2]
     end
   end
 
-  def down; end
+  def down
+  end
 end

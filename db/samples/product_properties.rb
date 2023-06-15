@@ -2,89 +2,89 @@
 
 products =
   {
-    'Solidus Tote' =>
+    "Solidus Tote" =>
     {
-      'Type' => 'Tote',
-      'Size' => %(15" x 18" x 6"),
-      'Material' => 'Canvas',
+      "Type" => "Tote",
+      "Size" => %{15" x 18" x 6"},
+      "Material" => "Canvas"
     },
-    'Solidus Snapback Cap' =>
+    "Solidus Snapback Cap" =>
     {
-      'Type' => 'Snapback Cap',
-      'Size' => 'One Size',
-      'Material' => '100% Cotton',
+      "Type" => "Snapback Cap",
+      "Size" => "One Size",
+      "Material" => "100% Cotton"
     },
-    'Solidus T-Shirt' =>
+    "Solidus T-Shirt" =>
     {
-      'Manufacturer' => 'Jerseys',
-      'Brand' => 'Conditioned',
-      'Model' => 'TL9002',
-      'Shirt Type' => 'Ringer T',
-      'Sleeve Type' => 'Short',
-      'Made from' => '100% Cotton',
-      'Fit' => 'Loose',
-      'Gender' => "Men's",
+      "Manufacturer" => "Jerseys",
+      "Brand" => "Conditioned",
+      "Model" => "TL9002",
+      "Shirt Type" => "Ringer T",
+      "Sleeve Type" => "Short",
+      "Made from" => "100% Cotton",
+      "Fit" => "Loose",
+      "Gender" => "Men's"
     },
-    'Solidus Hoodie Zip' =>
+    "Solidus Hoodie Zip" =>
     {
-      'Manufacturer' => 'Jerseys',
-      'Brand' => 'Wannabe Sports',
-      'Model' => 'HD9001',
-      'Shirt Type' => 'Jersey',
-      'Sleeve Type' => 'Long',
-      'Made from' => '100% cotton',
-      'Fit' => 'Loose',
-      'Gender' => 'Unisex',
+      "Manufacturer" => "Jerseys",
+      "Brand" => "Wannabe Sports",
+      "Model" => "HD9001",
+      "Shirt Type" => "Jersey",
+      "Sleeve Type" => "Long",
+      "Made from" => "100% cotton",
+      "Fit" => "Loose",
+      "Gender" => "Unisex"
     },
-    'Ruby Hoodie' =>
+    "Ruby Hoodie" =>
     {
-      'Manufacturer' => 'Wilson',
-      'Brand' => 'Resiliance',
-      'Model' => 'HD2001',
-      'Shirt Type' => 'Baseball',
-      'Sleeve Type' => 'Long',
-      'Made from' => '90% Cotton, 10% Nylon',
-      'Fit' => 'Loose',
-      'Gender' => 'Unisex',
+      "Manufacturer" => "Wilson",
+      "Brand" => "Resiliance",
+      "Model" => "HD2001",
+      "Shirt Type" => "Baseball",
+      "Sleeve Type" => "Long",
+      "Made from" => "90% Cotton, 10% Nylon",
+      "Fit" => "Loose",
+      "Gender" => "Unisex"
     },
-    'Ruby Hoodie Zip' =>
+    "Ruby Hoodie Zip" =>
     {
-      'Manufacturer' => 'Jerseys',
-      'Brand' => 'Wannabe Sports',
-      'Model' => 'HD9001',
-      'Shirt Type' => 'Jersey',
-      'Sleeve Type' => 'Long',
-      'Made from' => '100% cotton',
-      'Fit' => 'Loose',
-      'Gender' => 'Unisex',
+      "Manufacturer" => "Jerseys",
+      "Brand" => "Wannabe Sports",
+      "Model" => "HD9001",
+      "Shirt Type" => "Jersey",
+      "Sleeve Type" => "Long",
+      "Made from" => "100% cotton",
+      "Fit" => "Loose",
+      "Gender" => "Unisex"
     },
-    'Ruby Polo' =>
+    "Ruby Polo" =>
     {
-      'Manufacturer' => 'Wilson',
-      'Brand' => 'Resiliance',
-      'Model' => 'PL9001',
-      'Shirt Type' => 'Ringer T',
-      'Sleeve Type' => 'Short',
-      'Made from' => '100% Cotton',
-      'Fit' => 'Slim',
-      'Gender' => "Men's",
+      "Manufacturer" => "Wilson",
+      "Brand" => "Resiliance",
+      "Model" => "PL9001",
+      "Shirt Type" => "Ringer T",
+      "Sleeve Type" => "Short",
+      "Made from" => "100% Cotton",
+      "Fit" => "Slim",
+      "Gender" => "Men's"
     },
-    'Ruby Mug' =>
+    "Ruby Mug" =>
     {
-      'Type' => 'Mug',
-      'Size' => %(4.5" tall, 3.25" dia.),
+      "Type" => "Mug",
+      "Size" => %{4.5" tall, 3.25" dia.}
     },
-    'Solidus Girly' =>
+    "Solidus Girly" =>
     {
-      'Manufacturer' => 'Jerseys',
-      'Brand' => 'Conditioned',
-      'Model' => 'WM6001',
-      'Shirt Type' => 'Skinny',
-      'Sleeve Type' => 'Short',
-      'Made from' => '90% Cotton, 10% Nylon',
-      'Fit' => 'Slim',
-      'Gender' => "Women's",
-    },
+      "Manufacturer" => "Jerseys",
+      "Brand" => "Conditioned",
+      "Model" => "WM6001",
+      "Shirt Type" => "Skinny",
+      "Sleeve Type" => "Short",
+      "Made from" => "90% Cotton, 10% Nylon",
+      "Fit" => "Slim",
+      "Gender" => "Women's"
+    }
   }
 
 products.each do |name, properties|

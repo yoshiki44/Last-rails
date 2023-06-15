@@ -5,12 +5,12 @@ class RemoveOrderIdFromInventoryUnits < ActiveRecord::Migration[5.0]
   class InconsistentInventoryUnitError < StandardError; end
 
   class InventoryUnit < ActiveRecord::Base
-    self.table_name = 'spree_inventory_units'
+    self.table_name = "spree_inventory_units"
     belongs_to :shipment
   end
 
   class Shipment < ActiveRecord::Base
-    self.table_name = 'spree_shipments'
+    self.table_name = "spree_shipments"
     has_many :inventory_units
   end
 
@@ -20,10 +20,8 @@ class RemoveOrderIdFromInventoryUnits < ActiveRecord::Migration[5.0]
         where.not(
           'spree_inventory_units.order_id = spree_shipments.order_id'
         ).exists?
-      raise InconsistentInventoryUnitError,
-            'You have inventory units with inconsistent order references. Please fix those before running this migration'
+      raise InconsistentInventoryUnitError, "You have inventory units with inconsistent order references. Please fix those before running this migration"
     end
-
     remove_column :spree_inventory_units, :order_id
   end
 
