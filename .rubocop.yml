@@ -1,10 +1,26 @@
+ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
 # 文字数上限
 LineLength:
   Max: 130
 
 AllCops:
   Exclude:
+    - 'app/controllers/potepan/sample_controller.rb'
+    - 'app/channels/**/*'
     - 'db/**/*'
+    - 'config/**/*'
     - 'script/**/*'
     - 'node_modules/**/*'
     - 'bin/*'
