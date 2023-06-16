@@ -1,8 +1,0 @@
-example_id                              | status | run_time        |
---------------------------------------- | ------ | --------------- |
-./spec/requests/products_spec.rb[1:1:1] | failed | 0.08282 seconds |
-./spec/requests/products_spec.rb[1:2:1] | failed | 0.09755 seconds |
-./spec/requests/products_spec.rb[1:2:2] | failed | 2.08 seconds    |
-./spec/requests/products_spec.rb[1:2:3] | failed | 0.08376 seconds |
-./spec/requests/products_spec.rb[1:2:4] | failed | 0.08881 seconds |
-./spec/requests/products_spec.rb[1:2:5] | failed | 0.08497 seconds |
