@@ -4,7 +4,7 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe '#full_title(page_title)' do
     subject { full_title(page_title) }
 
-    context 'page_titleが空白の場合' do
+    context 'page_titleが空文字の場合' do
       let(:page_title) { '' }
 
       it { is_expected.to eq('BIGBAG Store') }
