@@ -34,7 +34,7 @@ RSpec.describe '詳細ページ', type: :system do
   end
 
   it '商品単価を表示すること' do
-    expect(page).to have_content product.display_price.to_s
+    expect(page).to have_content product.display_price
   end
 
   it '商品説明を表示すること' do
