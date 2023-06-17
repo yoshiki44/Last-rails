@@ -29,15 +29,15 @@ RSpec.describe '詳細ページ', type: :system do
     end
   end
 
-  it '商品名の取得に成功すること' do
+  it '商品名を表示すること' do
     expect(page).to have_content product.name
   end
 
-  it '商品単価の取得に成功すること' do
+  it '商品単価を表示すること' do
     expect(page).to have_content product.display_price.to_s
   end
 
-  it '商品説明の取得に成功すること' do
+  it '商品説明を表示すること' do
     expect(page).to have_content product.description
   end
 end
