@@ -1,0 +1,28 @@
+ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+LineLength:
+  Max: 130
+
+AllCops:
+  Exclude:
+    - 'app/controllers/potepan/sample_controller.rb'
+    - 'app/channels/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'node_modules/**/*'
+    - 'bin/*'
+    - '**/Gemfile'
+    - 'vendor/**/*'
+    - '.git/**/*'

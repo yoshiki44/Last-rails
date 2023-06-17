@@ -47,6 +47,11 @@
 /*=== MIXINS ===*/
 /*=== VARIABLES ===*/
 /*=== MEDIA QUERY ===*/
+.navbar-header{
+  width: 182px;
+  height: 58px;
+}
+
 * {
   outline: 0;
   margin: 0;
@@ -2924,7 +2929,7 @@ body.bodyColor.container {
 .singleProduct .media .media-body .list-inline {
   margin-bottom: 30px;
 }
-.singleProduct .media .media-body .list-inline li a {
+.singleProduct .media .media-body .list-inline li i {
   color: #b4b4b4;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -2932,7 +2937,7 @@ body.bodyColor.container {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.singleProduct .media .media-body .list-inline li a i {
+.singleProduct .media .media-body .list-inline li i {
   margin-right: 8px;
 }
 .singleProduct .media .media-body .list-inline li a:hover {

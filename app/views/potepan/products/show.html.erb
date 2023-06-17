@@ -1,0 +1,117 @@
+<% provide(:title, @product.name) %>
+<%= render "potepan/products/page_header", product_name: @product.name %>
+<section class="mainContent clearfix">
+  <div class="container">
+    <div class="row singleProduct">
+      <div class="col-xs-12">
+        <div class="media">
+          <div class="media-left productSlider">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <% @product.images.each_with_index do |image, index| %>
+                  <div class="item <%= "active" if index.zero? %>" data-thumb="<%= index %>">
+                    <%= image_tag image.attachment(:large), itemprop: "image" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="clearfix">
+              <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                <div class="carousel-inner">
+                  <% @product.images.each_with_index do |image, index| %>
+                    <div data-target="#carousel" data-slide-to="<%= index %>" class="thumb">
+                      <%= image_tag image.attachment(:product) %>
+                    </div>
+                  <% end %>
+                </div>
+                <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="media-body">
+            <ul class="list-inline">
+              <li><i class="fa fa-reply" aria-hidden="true"></i><%= link_to "一覧ページへ戻る", potepan_path %></li>
+            </ul>
+            <h2><%= @product.name %></h2>
+            <h3><%= @product.display_price %></h3>
+            <p><%= @product.description %></p>
+            <span class="quick-drop">
+              <select name="guiest_id3" id="guiest_id3" class="select-drop">
+                <option value="0">S</option>
+                <option value="1">M</option>
+                <option value="2">L</option>
+                <option value="3">XL</option>
+              </select>
+            </span>
+            <span class="quick-drop resizeWidth">
+              <select name="guiest_id4" id="guiest_id4" class="select-drop">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </span>
+            <div class="btn-area">
+              <a href="cart_page.html" class="btn btn-primary btn-block">カートへ入れる<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row productsContent">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h4>関連商品</h4>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-01.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+           <h5>Nike Sportswear</h5>
+           <h3>199円</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-02.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+           <h5>Dip Dyed Sweater</h5>
+           <h3>249円</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-03.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+           <h5>Scarf Ring Corner</h5>
+           <h3>179円</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-04.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+           <h5>Sun Buddies</h5>
+           <h3>149円</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
