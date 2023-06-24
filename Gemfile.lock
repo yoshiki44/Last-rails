@@ -1552,6 +1552,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  awesome_nested_set
   aws-sdk (~> 3.0)
   bootsnap
   byebug

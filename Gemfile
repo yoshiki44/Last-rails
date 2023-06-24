@@ -49,6 +49,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rails-erd'
   gem 'annotate'
+  gem 'awesome_nested_set'
 end
 
 group :development do
