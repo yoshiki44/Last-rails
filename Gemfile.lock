@@ -1418,6 +1418,7 @@ GEM
     ruby-progressbar (1.13.0)
     ruby-vips (2.1.2)
       ffi (~> 1.12)
+    rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -1428,6 +1429,10 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    selenium-webdriver (4.9.0)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
     solidus (2.11.10)
       solidus_api (= 2.11.10)
       solidus_backend (= 2.11.10)
@@ -1539,6 +1544,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    websocket (1.2.9)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -1571,6 +1577,7 @@ DEPENDENCIES
   rspec-rails
   rubocop-airbnb
   sass-rails (~> 6.0)
+  selenium-webdriver
   solidus (~> 2.11.0)
   solidus_auth_devise
   solidus_i18n!

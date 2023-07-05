@@ -87,16 +87,17 @@
         </div>
         <div class="row2">
           <% @category_products.each do |product| %>
+          <% binding.pry %>
             <div class="col-sm-4 col-xs-12">
               <div class="productBox">
                 <%= link_to potepan_product_path(product.id) do %>
                   <div class="productImage clearfix">
-                    <%= image_tag product.images.first.attachment(:product), :alt => "products-img" %>
+                    <%= image_tag product.images.first.attachment(:large), alt: "products-img" %>
                   </div>
-                    <div class="productCaption clearfix">
-                      <h5><%= product.name %></h5>
-                      <h3><%= product.display_price %></h3>
-                    </div>
+                  <div class="productCaption clearfix">
+                    <h5><%= product.name %></h5>
+                    <h3><%= product.display_price %></h3>
+                  </div>
                 <% end %>
               </div>
             </div>
