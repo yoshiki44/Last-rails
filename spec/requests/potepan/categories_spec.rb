@@ -23,13 +23,15 @@ RSpec.describe 'Products', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it "商品名が取得できること" do
-      binding.pry
+    it 'カテゴリー名が取得できること' do
+      expect(response.body).to include taxon.name
+    end
+
+    it '商品名が取得できること' do
       expect(response.body).to include product.name
     end
 
-    it "商品単価が取得できること" do
-      binding.pry
+    it '商品単価が取得できること' do
       expect(response.body).to include product.display_price.to_s
     end
   end
