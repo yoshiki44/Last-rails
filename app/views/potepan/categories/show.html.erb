@@ -17,7 +17,7 @@
                           <li>
                             <%= link_to potepan_category_path(taxon.id) do %>
                               <i class="fa fa-caret-right" aria-hidden="true"></i><%= taxon.name %>
-                              <span>(<%= taxon.products.count %>)</span>
+                              <span>(<%= taxon.products.size %>)</span>
                             <% end %>
                           </li>
                         <% end %>
@@ -28,21 +28,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="panel panel-default priceRange">
-          <div class="panel-heading">値段から探す</div>
-          <div class="panel-body clearfix">
-            <div class="price-slider-inner">
-              <span class="amount-wrapper">
-                <input type="text" id="price-amount-1" readonly>
-                <strong>-</strong>
-                <input type="text" id="price-amount-2" readonly>
-              </span>
-              <div id="price-range"></div>
-            </div>
-            <input class="btn btn-default" type="submit" value="絞り込む">
-            <!-- <span class="priceLabel">Price: <strong>12 円- 30<円/strong></span>
-          </div>
-        </div> -->
         <div class="panel panel-default filterNormal">
           <div class="panel-heading">色から探す</div>
           <div class="panel-body">

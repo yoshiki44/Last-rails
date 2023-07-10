@@ -50,6 +50,7 @@ group :development, :test do
   gem 'rails-erd'
   gem 'annotate'
   gem 'awesome_nested_set'
+  gem 'bullet'
 end
 
 group :development do

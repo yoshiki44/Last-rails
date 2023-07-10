@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'カテゴリーページ', type: :system do
-  let!(:taxonomy) { create(:taxonomy, name: 'Categories') }
-  let!(:taxon1) { create(:taxon, taxonomy: taxonomy, name: 'Bags') }
+  let(:taxonomy) { create(:taxonomy, name: 'Categories') }
+  let(:taxon1) { create(:taxon, taxonomy: taxonomy, name: 'Bags') }
   let!(:taxon2) { create(:taxon, taxonomy: taxonomy, name: 'Mugs') }
-  let!(:product) { create(:product) }
-  let!(:product1) { create(:product, taxons: [taxon1], name: 'RAILS TOTE') }
-  let!(:product2) { create(:product, taxons: [taxon1], name: 'RAILS BAGPACK') }
-  let!(:product3) { create(:product, taxons: [taxon2], name: 'RAILS CAP') }
-  let!(:image1) { create(:image) }
-  let!(:image2) { create(:image) }
+  let(:product) { create(:product) }
+  let(:product1) { create(:product, taxons: [taxon1], name: 'RAILS TOTE') }
+  let(:product2) { create(:product, taxons: [taxon1], name: 'RAILS BAGPACK') }
+  let(:product3) { create(:product, taxons: [taxon2], name: 'RAILS CAP') }
+  let(:image1) { create(:image) }
+  let(:image2) { create(:image) }
 
   before do
     product1.images << image1
@@ -27,7 +27,7 @@ RSpec.describe 'カテゴリーページ', type: :system do
   it 'サイドバーにカテゴリーが表示されること' do
     # taxonomyが表示される
     expect(page).to have_content taxonomy.name
-    # taxon1, taxon2 のカテゴリ名(と紐づく商品数)が表示される
+    # taxon1, taxon2 のカテゴリ名と商品数が表示される
     expect(page).to have_content "#{taxon1.name} (#{taxon1.all_products.count})"
     expect(page).to have_content "#{taxon2.name} (#{taxon2.all_products.count})"
   end
