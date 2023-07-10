@@ -4,7 +4,6 @@ RSpec.describe 'カテゴリーページ', type: :system do
   let(:taxonomy) { create(:taxonomy, name: 'Categories') }
   let(:taxon1) { create(:taxon, taxonomy: taxonomy, name: 'Bags') }
   let!(:taxon2) { create(:taxon, taxonomy: taxonomy, name: 'Mugs') }
-  let(:product) { create(:product) }
   let(:product1) { create(:product, taxons: [taxon1], name: 'RAILS TOTE') }
   let(:product2) { create(:product, taxons: [taxon1], name: 'RAILS BAGPACK') }
   let(:product3) { create(:product, taxons: [taxon2], name: 'RAILS CAP') }
