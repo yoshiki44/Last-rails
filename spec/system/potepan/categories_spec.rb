@@ -1,12 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'カテゴリーページ', type: :system do
-  let(:taxonomy) { create(:taxonomy, name: 'Categories') }
-  let(:taxon1) { create(:taxon, taxonomy: taxonomy, name: 'Bags') }
-  let!(:taxon2) { create(:taxon, taxonomy: taxonomy, name: 'Mugs') }
-  let(:product1) { create(:product, taxons: [taxon1], name: 'RAILS TOTE') }
-  let(:product2) { create(:product, taxons: [taxon1], name: 'RAILS BAGPACK') }
-  let(:product3) { create(:product, taxons: [taxon2], name: 'RAILS CAP') }
+RSpec.describe 'Categories', type: :system do
+  let(:taxonomy) { create(:taxonomy) }
+  let(:taxon1) { create(:taxon, taxonomy: taxonomy) }
+  let(:product1) { create(:product, taxons: [taxon1]) }
+  let(:product2) { create(:product) }
   let(:image1) { create(:image) }
   let(:image2) { create(:image) }
 
@@ -24,24 +22,24 @@ RSpec.describe 'カテゴリーページ', type: :system do
   end
 
   it 'サイドバーにカテゴリーが表示されること' do
-    # taxonomyが表示される
     expect(page).to have_content taxonomy.name
-    # taxon1, taxon2 のカテゴリ名と商品数が表示される
-    expect(page).to have_content "#{taxon1.name} (#{taxon1.all_products.count})"
-    expect(page).to have_content "#{taxon2.name} (#{taxon2.all_products.count})"
+    expect(page).to have_content "#{taxon1.name} (#{taxon1.all_products.size})"
   end
 
   it 'taxon1に関する商品が表示されること' do
     expect(page).to have_content product1.name
-    expect(page).to have_content product2.name
   end
 
   it 'taxon1に関連しない商品は表示されないこと' do
-    expect(page).not_to have_content product3.name
+    expect(page).not_to have_content product2.name
   end
 
   it '商品名をクリックすると詳細ページに遷移できること' do
-    click_link 'RAILS TOTE'
+    click_link product1.name
     expect(current_path).to eq potepan_product_path(product1.id)
+  end
+
+  it 'サイドバーの商品数と表示されている商品数が一致していること' do
+    expect(page.all('.productBox').count).to eq taxon1.all_products.size
   end
 end

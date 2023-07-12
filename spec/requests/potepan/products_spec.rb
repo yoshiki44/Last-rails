@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Products', type: :request do
+RSpec.describe 'ProductsRequests', type: :request do
   let(:product) { create(:product) }
   let(:image) { create(:image) }
   let(:product) { create(:product, taxons: [taxon]) }

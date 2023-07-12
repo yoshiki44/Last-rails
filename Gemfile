@@ -49,8 +49,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rails-erd'
   gem 'annotate'
-  gem 'awesome_nested_set'
-  gem 'bullet'
 end
 
 group :development do
@@ -61,6 +59,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.1'
   gem 'rubocop-airbnb'
+  gem 'awesome_nested_set'
+  gem 'bullet'
 end
 
 group :test do
