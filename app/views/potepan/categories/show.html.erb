@@ -12,16 +12,16 @@
                 <% @taxonomies.each_with_index do |taxonomy, index| %>
                   <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#<%= index %>"><%= taxonomy.name %> <i class="fa fa-plus"></i></a>
-                      <ul id="<%= index %>" class="collapse collapseItem">
-                        <% taxonomy.taxons.leaves.each do |taxon| %>
-                          <li>
-                            <%= link_to potepan_category_path(taxon.id) do %>
-                              <i class="fa fa-caret-right" aria-hidden="true"></i><%= taxon.name %>
-                              <span>(<%= taxon.products.size %>)</span>
-                            <% end %>
-                          </li>
-                        <% end %>
-                      </ul>
+                    <ul id="<%= index %>" class="collapse collapseItem">
+                      <% taxonomy.taxons.leaves.each do |taxon| %>
+                        <li>
+                          <%= link_to potepan_category_path(taxon.id) do %>
+                            <i class="fa fa-caret-right" aria-hidden="true"></i><%= taxon.name %>
+                            <span>(<%= taxon.products.size %>)</span>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
                   </li>
                 <% end %>
               </ul>
