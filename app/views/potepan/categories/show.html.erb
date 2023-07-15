@@ -1,0 +1,94 @@
+<% provide(:title, @taxon.name) %>
+<%= render "potepan/categories/category_page_header", taxon_name: @taxon.name %>
+<section class="mainContent clearfix productsContent">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
+        <div class="panel panel-default">
+          <div class="panel-heading">商品カテゴリー</div>
+          <div class="panel-body">
+            <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
+              <ul class="nav navbar-nav side-nav">
+                <% @taxonomies.each_with_index do |taxonomy, index| %>
+                  <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#<%= index %>"><%= taxonomy.name %> <i class="fa fa-plus"></i></a>
+                    <ul id="<%= index %>" class="collapse collapseItem">
+                      <% taxonomy.taxons.leaves.each do |taxon| %>
+                        <li>
+                          <%= link_to potepan_category_path(taxon.id) do %>
+                            <i class="fa fa-caret-right" aria-hidden="true"></i><%= taxon.name %>
+                            <span>(<%= taxon.products.size %>)</span>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default filterNormal">
+          <div class="panel-heading">色から探す</div>
+          <div class="panel-body">
+            <ul class="list-unstyled">
+              <li><a href="#">ブラック<span>(15)</span></a></li>
+              <li><a href="#">ホワイト<span>(10)</span></a></li>
+              <li><a href="#">レッド<span>(7)</span></a></li>
+              <li><a href="#">ブルー<span>(12)</span></a></li>
+              <li><a href="#">オレンジ<span>(12)</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel panel-default filterNormal">
+          <div class="panel-heading">サイズから探す</div>
+          <div class="panel-body">
+            <ul class="list-unstyled clearfix">
+              <li><a href="#">S<span>(15)</span></a></li>
+              <li><a href="#">M<span>(10)</span></a></li>
+              <li><a href="#">L<span>(7)</span></a></li>
+              <li><a href="#">XL<span>(12)</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-8 col-xs-12">
+        <div class="row filterArea">
+          <div class="col-xs-6">
+            <select name="guiest_id1" id="guiest_id1" class="select-drop">
+              <option value="0">並び替え</option>
+              <option value="1">人気順</option>
+              <option value="2">安い順</option>
+              <option value="3">新着順</option>
+              <option value="3">高い順</option>
+            </select>
+          </div>
+          <div class="col-xs-6">
+            <div class="btn-group pull-right" role="group">
+              <button type="button" class="btn btn-default active" onclick="window.location.href='product_grid_left_sidebar.html'"><i class="fa fa-th" aria-hidden="true"></i><span>Grid</span></button>
+              <button type="button" class="btn btn-default" onclick="window.location.href='product_list_left_sidebar.html'"><i class="fa fa-th-list" aria-hidden="true"></i><span>List</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="row2">
+          <% @category_products.each do |product| %>
+            <div class="col-sm-4 col-xs-12">
+              <div class="productBox">
+                <%= link_to potepan_product_path(product.id) do %>
+                  <div class="productImage clearfix">
+                    <%= image_tag product.images.first.attachment(:large), alt: "products-img" %>
+                  </div>
+                  <div class="productCaption clearfix">
+                    <h5><%= product.name %></h5>
+                    <h3><%= product.display_price %></h3>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<%= render "shared/light_section" %>
