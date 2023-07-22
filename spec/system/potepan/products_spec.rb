@@ -4,10 +4,15 @@ RSpec.describe 'Products', type: :system do
   let(:taxonomy) { create(:taxonomy) }
   let(:taxon) { create(:taxon, taxonomy: taxonomy) }
   let(:product) { create(:product, taxons: [taxon]) }
-  let(:related_image) { create(:image) }
+  let(:image) { create(:image) }
+  let(:related_products) { create_list(:product, 5, taxons: [taxon]) }
+  let(:other_product) { create(:product) }
 
   before do
-    product.images << related_image
+    product.images << image
+    related_products.each do |related_product|
+      related_product.images << create(:image)
+    end
     visit potepan_product_path(product.id)
   end
 
@@ -47,5 +52,31 @@ RSpec.describe 'Products', type: :system do
 
   it '商品説明を表示すること' do
     expect(page).to have_content product.description
+  end
+
+  it '関連商品の品名、価格、表示されていること' do
+    within '.productsContent' do
+      related_products.first(4).all? do |related_product|
+        expect(page).to have_content related_product.name
+        expect(page).to have_content related_product.display_price.to_s
+      end
+    end
+  end
+
+  it '関連商品から、商品詳細ページに遷移できること' do
+    within '.productsContent' do
+      related_products.first(4).all? do |related_product|
+        click_on related_product.name
+        expect(current_path).to eq potepan_product_path(related_product.id)
+      end
+    end
+  end
+
+  it '関連しない商品が表示されないこと' do
+    expect(page).to_not have_content other_product.name
+  end
+
+  it '関連商品が４つ表示されていること' do
+    expect(page.all('.productBox').count).to eq 4
   end
 end
