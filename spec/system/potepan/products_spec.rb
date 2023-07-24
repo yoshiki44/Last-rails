@@ -5,12 +5,12 @@ RSpec.describe 'Products', type: :system do
   let(:taxon) { create(:taxon, taxonomy: taxonomy) }
   let(:product) { create(:product, taxons: [taxon]) }
   let!(:image) { create(:image) }
-  let!(:related_products) {
+  let!(:related_products) do
     create_list(:product, 5, taxons: [taxon]).each_with_index do |product, i|
-    product.price = i+1
-    product.save!
+      product.price = i + 1
+      product.save!
+    end
   end
-}
   let!(:other_product) { create(:product) }
 
   before do
@@ -62,7 +62,6 @@ RSpec.describe 'Products', type: :system do
   it '関連商品の品名、価格、表示されていること' do
     within '.productsContent' do
       related_products.first(4).all? do |related_product|
-        binding.pry
         expect(page).to have_content related_product.name
         expect(page).to have_content related_product.display_price.to_s
       end
