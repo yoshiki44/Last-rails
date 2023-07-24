@@ -48,8 +48,6 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'rails-erd'
-  gem 'annotate'
-  gem 'draper'
 end
 
 group :development do
