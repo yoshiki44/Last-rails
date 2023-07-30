@@ -4,13 +4,12 @@ RSpec.describe 'Products', type: :model do
   describe '#related_products' do
     let(:taxonomy) { create(:taxonomy) }
     let(:taxon) { create(:taxon, taxonomy: taxonomy) }
-    let!(:taxon) { create(:taxon) }
     let!(:taxon2) { create(:taxon, name: 'taxon2') }
     let!(:taxon3) { create(:taxon, name: 'taxon3') }
     let!(:taxon4) { create(:taxon, name: 'taxon4') }
     let!(:taxon5) { create(:taxon, name: 'taxon5') }
     let!(:product) { create(:product, taxons: [taxon, taxon2, taxon3, taxon4]) }
-    let!(:related_product1) { create(:product, taxons: [taxon]) }
+    let!(:related_product1) { create(:product, taxons: [taxon, taxon2]) }
     let!(:related_product2) { create(:product, taxons: [taxon2]) }
     let!(:related_product3) { create(:product, taxons: [taxon3]) }
     let!(:related_product4) { create(:product, taxons: [taxon4]) }
